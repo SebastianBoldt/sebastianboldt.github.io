@@ -1,29 +1,34 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sebastian Boldt — Portfolio</title>
-  <meta name="description" content="Persönliches Portfolio von Sebastian Boldt — Apps, Projekte und berufliche Stationen." />
+  <meta name="description" content="Personal portfolio of Sebastian Boldt — apps, projects and professional experience." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root{--bg:#060606;--card:#0b0b0d;--muted:#98a0a8;--accent:#f3e03b;--glass:rgba(255,255,255,0.03);}
-    html,body{height:100%;}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#eef2f7;background:linear-gradient(180deg,#050506 0%, #0a0a0b 100%);-webkit-font-smoothing:antialiased;}
-    .site{max-width:960px;margin:36px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.02);} 
+    /* Dark theme with violet/purple accent matching provided images */
+    :root{--bg:#050506;--card:#0b0b0d;--muted:#98a0a8;--accent:#9c7cff;--accent-strong:#7c5cf6;--glass:rgba(255,255,255,0.03);} 
+    html,body{height:100%;width:100%;}
+    /* make sure the base background fills the full viewport to avoid seams */
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#eef2f7;background-color:var(--bg);background-image:linear-gradient(180deg,#040405 0%, #070708 100%);background-repeat:no-repeat;background-attachment:fixed;-webkit-font-smoothing:antialiased;}
+    /* remove the subtle site border (it produced a visible edge on some displays) and soften shadow */
+    .site{max-width:960px;margin:36px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));border-radius:14px;box-shadow:0 18px 60px rgba(0,0,0,0.8);border:none;}
 
     /* Header — prominent, centered avatar + socials */
     header{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 12px 6px;text-align:center}
-    .avatar{width:160px;height:160px;border-radius:9999px;flex:0 0 160px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:6px solid rgba(243,224,59,0.08);box-shadow:0 10px 40px rgba(243,224,59,0.04), 0 6px 18px rgba(0,0,0,0.6)}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .avatar{width:160px;height:160px;border-radius:9999px;flex:0 0 160px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:6px solid rgba(156,124,255,0.10);box-shadow:0 10px 40px rgba(124,92,246,0.06), 0 6px 18px rgba(0,0,0,0.6)}
+    /* Ensure avatar.card has no inner padding (so image reaches the inner border) */
+    .avatar.card{padding:0}
+    .avatar img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .3s ease}
     .intro{flex:1;display:flex;flex-direction:column;align-items:center}
     h1{margin:0;font-size:1.8rem;color:var(--accent);letter-spacing:0.4px}
     p.lead{margin:8px 0 12px;color:var(--muted);max-width:760px}
 
-    .socials{display:flex;gap:10px;flex-wrap:nowrap;justify-content:center}
-    .socials a{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9999px;background:rgba(243,224,59,0.06);color:#fff;text-decoration:none;border:1px solid rgba(243,224,59,0.09);font-weight:600;font-size:0.95rem;transition:transform .12s ease,box-shadow .12s ease}
-    .socials a:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(243,224,59,0.06)}
+    .socials{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:100%}
+    .socials a{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9999px;background:linear-gradient(90deg, rgba(156,124,255,0.06), rgba(124,92,246,0.04));color:#fff;text-decoration:none;border:1px solid rgba(156,124,255,0.10);font-weight:600;font-size:0.95rem;transition:transform .12s ease,box-shadow .12s ease;flex:0 1 auto;white-space:nowrap}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(124,92,246,0.08)}
     .socials a span.icon{display:inline-flex;width:18px;height:18px}
     .socials a i{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
 
@@ -34,18 +39,18 @@
     /* Projects */
     .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
     .project{display:flex;gap:12px}
-    .project .thumb{width:84px;height:84px;border-radius:12px;overflow:hidden;background:#070709;flex:0 0 84px;box-shadow:inset 0 -8px 30px rgba(0,0,0,0.4)}
+    .project .thumb{width:84px;height:84px;border-radius:12px;overflow:hidden;background:#070709;flex:0 0 84px;box-shadow:inset 0 -8px 30px rgba(0,0,0,0.45)}
     .project .thumb img{width:100%;height:100%;object-fit:cover}
     .project .meta{flex:1}
     .project .meta h3{margin:0;font-size:1rem;color:#fff}
     .project .meta p{margin:6px 0;color:var(--muted);font-size:0.95rem}
     .badges{margin-top:8px;display:flex;gap:8px}
-    .badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:0.85rem}
+    .badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(156,124,255,0.06);font-size:0.85rem;color:#fff}
 
     /* Timeline */
     .timeline{display:flex;flex-direction:column;gap:12px}
     .item{display:flex;gap:12px;align-items:flex-start}
-    .item .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex:0 0 12px;margin-top:6px;box-shadow:0 6px 18px rgba(243,224,59,0.08)}
+    .item .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex:0 0 12px;margin-top:6px;box-shadow:0 6px 18px rgba(124,92,246,0.08)}
     .item .body{background:transparent}
     .item h4{margin:0;font-size:0.98rem}
     .item p{margin:6px 0;color:var(--muted);font-size:0.95rem}
@@ -56,7 +61,8 @@
       header{padding:12px}
       .avatar{width:120px;height:120px;flex:0 0 120px;border-width:4px}
       h1{font-size:1.25rem}
-      .socials{gap:8px;padding:0 6px;overflow:auto}
+      .socials{gap:8px;padding:0 6px;overflow:visible;justify-content:center}
+      .socials a{padding:8px 10px;font-size:0.9rem}
     }
   </style>
 </head>
@@ -64,41 +70,32 @@
   <main class="site">
     <header>
       <div class="avatar card">
-        <!-- Ersetze src durch dein Profilbild: assets/profile.jpg oder ähnliches -->
-        <img src="assets/profile.jpg" alt="Profilbild von Sebastian Boldt" onerror="this.style.display='none'">
-        <!-- Fallback: Initialen (wird sichtbar, falls kein Bild vorhanden) -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" style="width:100%;height:100%;" aria-hidden="true">
-          <rect width="100%" height="100%" fill="#0b0b0d"/>
-          <text x="50%" y="52%" fill="#f3e03b" font-size="46" font-family="Inter,Arial" text-anchor="middle" dominant-baseline="middle">SB</text>
-        </svg>
+        <!-- Profilbild (rund, zentriert, wird zugeschnitten) -->
+        <img src="Images/profile.JPG" alt="Profilbild von Sebastian Boldt" onerror="this.style.display='none'">
       </div>
 
       <div class="intro">
-        <h1>Sebastian Boldt</h1>
-        <p class="lead">iOS-Entwickler, App-Autor und Maker. Hier sind meine Projekte und beruflichen Stationen.</p>
+        <h1>Hello World!</h1>
+        <p class="lead">Mobile Software Architect/Developer</p>
 
         <nav class="socials" aria-label="Social Links">
-          <a href="#" title="Xing" aria-label="Xing">
-            <i class="fab fa-xing" aria-hidden="true"></i>
-            Xing
-          </a>
-          <a href="#" title="LinkedIn" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" title="LinkedIn" aria-label="LinkedIn">
             <i class="fab fa-linkedin" aria-hidden="true"></i>
             LinkedIn
           </a>
-          <a href="#" title="Medium" aria-label="Medium">
+          <a href="https://medium.com/@sebastianbo" title="Medium" aria-label="Medium">
             <i class="fab fa-medium" aria-hidden="true"></i>
             Medium
           </a>
-          <a href="#" title="GitHub" aria-label="GitHub">
+          <a href="https://github.com/SebastianBoldt" title="GitHub" aria-label="GitHub">
             <i class="fab fa-github" aria-hidden="true"></i>
             GitHub
           </a>
-          <a href="#" title="SoundCloud" aria-label="SoundCloud">
+          <a href="https://soundcloud.com/sebastian_boldt" title="SoundCloud" aria-label="SoundCloud">
             <i class="fab fa-soundcloud" aria-hidden="true"></i>
             SoundCloud
           </a>
-          <a href="#" title="Instagram" aria-label="Instagram">
+          <a href="https://www.instagram.com/sebastianboldt/" title="Instagram" aria-label="Instagram">
             <i class="fab fa-instagram" aria-hidden="true"></i>
             Instagram
           </a>
@@ -109,7 +106,7 @@
     <!-- Projekte -->
     <section>
       <div class="section-title">
-        <h2 style="margin:0">Projekte</h2>
+        <h2 style="margin:0">Projects</h2>
       </div>
 
       <div class="projects">
@@ -117,15 +114,14 @@
         <article class="card project">
           <div class="thumb">
             <!-- App Icon / Screenshot -->
-            <img src="assets/habitbe-icon.png" alt="HabitBe App Icon" onerror="this.style.display='none'">
+            <img src="Images/HabitBeAppIcon.png" alt="HabitBe App Icon" onerror="this.style.display='none'">
           </div>
           <div class="meta">
             <h3>HabitBe — iOS App</h3>
-            <p>HabitBe ist eine iOS-App zur Gewohnheitsverfolgung, vollständig von mir entwickelt und im App Store veröffentlicht.</p>
+            <p>HabitBe is an iOS app for habit tracking, fully developed by me and published on the App Store.</p>
             <div class="badges">
-              <a class="badge" href="#" title="App Store Link">App Store</a>
-              <span class="badge">Swift / UIKit</span>
-              <span class="badge">Eigenes Projekt</span>
+              <a class="badge" href="https://apps.apple.com/en/app/habitbe-weekly-habit-tracker/id1527811684" title="App Store Link">App Store</a>
+              <span class="badge">Released</span>
             </div>
           </div>
         </article>
@@ -133,14 +129,13 @@
         <!-- Unveröffentlichtes Projekt -->
         <article class="card project">
           <div class="thumb">
-            <img src="assets/nextproject-icon.png" alt="Nächstes Projekt Icon" onerror="this.style.display='none'">
+            <img src="Images/PianooAppIcon.png" alt="Pianoo" onerror="this.style.display='none'">
           </div>
           <div class="meta">
-            <h3>Neues Projekt (in Arbeit)</h3>
-            <p>Aktuell in Entwicklung. Screenshots und App-Icon können hier angezeigt werden, sobald verfügbar.</p>
+            <h3>Pianoo - iOS App</h3>
+            <p>Currently in development.</p>
             <div class="badges">
-              <span class="badge">In Arbeit</span>
-              <span class="badge">Screenshots verfügbar</span>
+              <span class="badge">Unreleased</span>
             </div>
           </div>
         </article>
@@ -150,9 +145,9 @@
       <!-- Optional: größere Galerie / Screenshots -->
       <div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
         <!-- Beispiel-Screenshots (ersetzen durch reale Dateien in /assets) -->
-        <img src="assets/habitbe-ss-1.png" alt="Screenshot HabitBe" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
-        <img src="assets/habitbe-ss-2.png" alt="Screenshot HabitBe" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
-        <img src="assets/nextproject-ss-1.png" alt="Screenshot neues Projekt" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
+        <img src="assets/habitbe-ss-1.png" alt="HabitBe screenshot" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
+        <img src="assets/habitbe-ss-2.png" alt="HabitBe screenshot" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
+        <img src="assets/nextproject-ss-1.png" alt="New project screenshot" style="width:100%;border-radius:8px;object-fit:cover;max-height:220px;" onerror="this.style.display='none'">
       </div>
 
     </section>
@@ -160,39 +155,47 @@
     <!-- Lebenslauf / Stationen -->
     <section>
       <div class="section-title" style="margin-top:18px">
-        <h2 style="margin:0">Lebenslauf</h2>
+        <h2 style="margin:0">Experience</h2>
       </div>
 
       <div class="card timeline">
         <div class="item">
           <div class="dot" aria-hidden></div>
           <div class="body">
-            <h4>2023–Heute — iOS-Entwickler (freiberuflich)</h4>
-            <p>Entwicklung von iOS-Apps, Beratung und App-Launches. (Platzhalter)</p>
+            <h4>Oct 2022–Present — iOS Lead Developer, Aviv</h4>
+            <p>Full-time · Hamburg, Germany<br>Leading and architecting mobile iOS projects; technical ownership of apps, code reviews and mentoring.</p>
           </div>
         </div>
 
         <div class="item">
           <div class="dot" aria-hidden></div>
           <div class="body">
-            <h4>2020–2023 — Mobile Developer bei Beispiel GmbH</h4>
-            <p>Arbeit an Kundenprojekten und internen Apps. (Platzhalter)</p>
+            <h4>Apr 2016–Oct 2022 — Software Engineer, Mobile Applications, Immowelt/Immonet</h4>
+            <p>Maintenance, refactoring and continuous development of innovative iOS apps for iPhone and iPad. Worked on feature releases, performance optimization and crash analysis.</p>
           </div>
         </div>
 
         <div class="item">
           <div class="dot" aria-hidden></div>
           <div class="body">
-            <h4>2017–2020 — Junior iOS-Entwickler</h4>
-            <p>Weiterentwicklung und Wartung von iOS-Anwendungen. (Platzhalter)</p>
+            <h4>Feb 2015–Mar 2016 — iOS Developer, Empora Group GmbH</h4>
+            <p>Developed the Fashionfreax app: concept, implementation and release for iPhone/iPad. Implemented UI, networking and app integration.</p>
           </div>
         </div>
 
         <div class="item">
           <div class="dot" aria-hidden></div>
           <div class="body">
-            <h4>2014–2017 — Studium / Ausbildung</h4>
-            <p>Ausbildung im Bereich Informatik / Medien. (Platzhalter)</p>
+            <h4>2013–2014 — Master's degree, Multimedia Engineering, Hochschule Wismar</h4>
+            <p>Focus: microprocessor technology, image processing and software development.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="dot" aria-hidden></div>
+          <div class="body">
+            <h4>2009–2013 — Bachelor's degree, Multimedia Engineering, Hochschule Wismar</h4>
+            <p>Degree in Multimedia Engineering.</p>
           </div>
         </div>
 
@@ -200,9 +203,8 @@
     </section>
 
     <footer>
-      Hinweis: Bilder und Links sind Platzhalter — ersetze sie in /assets und setze die echten Social-Profile.
+        <p>© Vibe coded in 2025 by Sebastian Boldt. All rights reserved.</p>
     </footer>
-
   </main>
 </body>
 </html>
