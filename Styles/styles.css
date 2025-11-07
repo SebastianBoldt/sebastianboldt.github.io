@@ -1,0 +1,211 @@
+@font-face {
+    font-family: 'SFPro';
+    src: url('SFPro.ttf'); 
+}
+
+body {
+    color: #CCC;
+    background-color: #181818;
+}
+
+a {
+    color: #CCC;
+}
+
+a:hover {
+    color: #FE375E;
+}
+
+h2,h3,h4 {
+    text-align: center;
+    background-image:linear-gradient(60deg,#FE375E,#FFD607);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+#edu-description {
+    margin-top: 15px;
+}
+
+.columns {
+    background-color: white;
+    color: #CCC;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.work .three {
+    background-color: white;
+    color: #0983FF;
+    background-color: transparent;
+    padding: 10px;
+    text-align: right;
+}
+
+.header {
+    margin-bottom: 3em;
+}
+
+.work .nine {
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.container {
+    max-width: 800px;
+    margin-top: 7em;
+    margin-bottom: 10em;
+    text-align: center;
+}
+
+.main-header {
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    width:100%;
+    background:#0983FF;
+    color:white;
+    text-align: center;
+    padding-top:8px;
+    font-size: 10px;
+    height: 21px;
+}
+
+.skills {
+    text-align: left;
+}
+
+.destiny columns a{
+    text-decoration: none;
+}
+
+.social-buttons {
+    list-style-type: none;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.social-buttons li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.links {
+    list-style-type: none;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.links li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-image:linear-gradient(60deg,#0983FF,#0983FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.blog p a, .opensource p a {
+    text-decoration: none;
+    color: #CCC;
+}
+
+.blog p a:hover, .opensource p a:hover {
+    color: #0983FF;
+}
+
+.blog p, .education p, .opensource p {
+    margin: 0px;
+    text-align: center;
+}
+
+.separator {
+    height: 1px;
+    background-color: #5C6E74;
+    margin: 3em;
+    align: center;
+    text-align: center;
+}
+
+.tag {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #0983FF;
+    color: #FFF;
+    background-color: transparent;
+    padding: 10px;
+    display: inline-block;
+    margin-top: 2px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+.blog-header {
+    text-decoration: underline;
+}
+
+
+.publishdate {
+    font-size: 10px;
+    opacity: 0.5;
+    border-radius: 10px;
+}
+
+
+.active-tag {
+    font-size:  12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #2FD157;
+}
+
+.framework-tag {
+    font-size:  12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.app-tag {
+    font-size:  12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.inactive-tag {
+    opacity: 0.5;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #FE375E;
+}
+
+.closed-source {
+    opacity: 0.5;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.open-source {
+    opacity: 0.5;
+    font-size:  12px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
