@@ -3,6 +3,10 @@
     src: url('/SFPro.ttf'); 
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     color: #CCC;
     background-color: #181818;
