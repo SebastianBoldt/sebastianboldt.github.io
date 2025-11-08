@@ -26,6 +26,7 @@ h2,h3,h4 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 30px;
+    font-weight: bold;
 }
 
 #edu-description {
@@ -68,6 +69,7 @@ h2,h3,h4 {
 .main-header {
     margin-bottom: 0.5em;
     text-align: center;
+    font-weight: bold;
 }
 
 .footer {
