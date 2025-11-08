@@ -90,6 +90,76 @@ h2,h3,h4 {
     z-index: 30;
 }
 
+/* Navigation buttons */
+.nav-button {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(11,11,15,0.75);
+    border: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 40;
+}
+
+.nav-button:hover {
+    background: rgba(124,77,255,0.15);
+    border-color: rgba(124,77,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124,77,255,0.15);
+}
+
+.back-home {
+    left: 20px;
+    top: 40px;
+}
+
+/* Scroll to top button */
+.scroll-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    opacity: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 40;
+}
+
+.scroll-top:hover {
+    background: rgba(124,77,255,0.15);
+    border-color: rgba(124,77,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124,77,255,0.15);
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Show scroll button when page is scrolled */
+@media (min-width: 768px) {
+    .scroll-top {
+        bottom: 40px;
+        right: 40px;
+    }
+    .back-home {
+        bottom: 40px;
+        left: 40px;
+    }
+}
+
+/* Responsive tweaks */
+
 .skills {
     text-align: left;
 }

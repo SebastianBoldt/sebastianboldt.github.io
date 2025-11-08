@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="Styles/skeleton.css">
     <link rel="stylesheet" href="Styles/styles.css">
     <script src="fontawesome-5.2.0.js"></script>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollButton = document.querySelector('.scroll-top');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.classList.add('visible');
+                } else {
+                    scrollButton.classList.remove('visible');
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -39,7 +53,8 @@
                 <a href="https://soundcloud.com/sebastian_boldt" title="Sebastian Boldt" target="_blank"
                     style="color: #cccccc; text-decoration: none;">Sebastian Boldt</a> · <a
                     href="https://soundcloud.com/sebastian_boldt/sets/a-u-r-o-r-a" title="AURORA (2020)" target="_blank"
-                    style="color: #cccccc; text-decoration: none;">AURORA (2020)</a></div>
+                    style="color: #cccccc; text-decoration: none;">AURORA (2020)</a>
+            </div>
 
             <iframe width="100%" height="166" scrolling="no" frameborder="no"
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/112755295&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_artwork=false"></iframe>
@@ -82,7 +97,13 @@
         <div class="footer">Copyright 2025 Sebastian Boldt.
             - <a href="/privacy">Privacy</a>
         </div>
-
+        <a href="index.html" class="nav-button back-home" aria-label="Back to home">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="#" class="nav-button scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     </div>
 </body>
+
 </html>

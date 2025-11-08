@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="Styles/skeleton.css">
     <link rel="stylesheet" href="Styles/styles.css">
     <script src="fontawesome-5.2.0.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollButton = document.querySelector('.scroll-top');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.classList.add('visible');
+                } else {
+                    scrollButton.classList.remove('visible');
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -422,9 +436,16 @@
                 programming, networking and communications, and application and web programming.</p>
         </div>
 
-        <div class="footer">© 2025 Sebastian Boldt. - <a href="privacy.html">Privacy</a></div>
-
+    <div class="footer">© 2025 Sebastian Boldt. - <a href="privacy.html">privacy</a></div>
+        
     </div>
+
+    <a href="index.html" class="nav-button back-home" aria-label="Back to home">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <a href="#" class="nav-button scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 </body>
 
 </html>
