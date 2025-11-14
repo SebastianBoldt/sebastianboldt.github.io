@@ -1,2 +1,3 @@
-# sebastianboldt.github.io
-Static Website
+# Custom Landing Page
+
+https://sebastianboldt.io
