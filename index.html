@@ -327,7 +327,7 @@
 
                 <!-- Service 2: Modern Frameworks & Tech -->
                 <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-200 flex flex-col">
+                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
                     <div
                         class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
                         <i class="ph ph-device-mobile"></i>
@@ -347,7 +347,7 @@
 
                 <!-- Service 3: Team & Process Focus -->
                 <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-300 flex flex-col">
+                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
                     <div
                         class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
                         <i class="ph ph-users"></i>
@@ -366,7 +366,7 @@
 
                 <!-- Service 4: Agentic Coding -->
                 <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-400 flex flex-col">
+                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
                     <div
                         class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
                         <i class="ph ph-robot"></i>
@@ -739,7 +739,6 @@
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                // Check if element is in viewport
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
