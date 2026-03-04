@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sebastian Boldt - Mobile Application Engineer</title>
 
-    <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+    <!-- Google Fonts: Syne (Display) & DM Sans (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Syne:wght@400;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Tailwind CSS -->
@@ -19,744 +19,346 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Custom Config for Tailwind Colors/Fonts (Orange Accent) -->
+    <!-- Tailwind: modern minimal theme -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
+                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+                        display: ['Syne', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            400: '#60a5fa',
-                            500: '#3b82f6', // Haupt-Blau
-                            600: '#2563eb',
-                            900: '#1e3a8a',
+                            400: '#7dd3fc',
+                            500: '#38bdf8',
+                            600: '#0ea5e9',
+                        },
+                        surface: {
+                            DEFAULT: '#0a0a0a',
+                            elevated: '#141414',
+                            muted: '#1c1c1c',
                         },
                         neutral: {
-                            100: '#f5f5f5',
-                            200: '#e5e5e5',
-                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
                             700: '#404040',
                             800: '#262626',
                             900: '#171717',
                         },
-                        success: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            400: '#34d399',
-                            500: '#10b981', // Haupt-Grün
-                            600: '#059669',
-                            900: '#064e3b'
-                        }
+                        success: { 400: '#34d399', 500: '#10b981', }
                     },
-                    aspectRatio: {
-                        '4/3': '4 / 3',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
+                    aspectRatio: { '4/3': '4 / 3' },
                 }
             }
         }
     </script>
 
     <style>
-        /* Custom Utilities */
-        .glass {
-            background: rgba(23, 23, 23, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .text-gradient {
-            background: linear-gradient(to right, #3b82f6, #dbeafe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tag-style {
-            display: inline-flex;
-            align-items: center;
-
-            font-size: 0.75rem;
-            /* text-xs */
-            line-height: 1rem;
-
-            font-weight: 600;
-            /* font-semibold */
-
-            padding-left: 0.625rem;
-            /* px-2.5 */
-            padding-right: 0.625rem;
-            padding-top: 0.125rem;
-            /* py-0.5 */
-            padding-bottom: 0.125rem;
-
-            border-radius: 9999px;
-            /* rounded-full */
-
-            border-width: 1px;
-            /* border */
-            border-color: rgb(64 64 64);
-            /* border-neutral-700 */
-
-            background-color: rgb(38 38 38);
-            /* bg-neutral-800 */
-
-            color: rgb(163 163 163);
-            /* text-neutral-400 */
-
-            margin: 0.125rem;
-            /* m-0.5 */
-        }
-
-        /* Fade In Animation Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .glass { background: rgba(10,10,10,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #a5f3fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .tag-style { display: inline-flex; align-items: center; font-size: 0.7rem; font-weight: 500; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.08); margin: 0.1rem; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 
 <body
-    class="bg-neutral-900 text-neutral-200 font-sans selection:bg-brand-500 selection:text-neutral-900 overflow-x-hidden">
+    class="bg-surface text-white/90 font-sans text-base antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden">
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo / Name -->
-            <a href="#" class="text-2xl font-display font-bold text-white flex items-center gap-2">
-                sebastianboldt.io
-            </a>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
-                <a href="#skills" class="hover:text-brand-500 transition-colors">Expertise</a>
-                <a href="#work" class="hover:text-brand-500 transition-colors">Work</a>
-                <a href="#projects" class="hover:text-brand-500 transition-colors">Projects</a>
-                <a href="#blog" class="hover:text-brand-500 transition-colors">Blog</a>
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="text-lg font-display font-semibold text-white tracking-tight">sebastianboldt.io</a>
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/60">
+                <a href="#skills" class="hover:text-white transition-colors">Expertise</a>
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#blog" class="hover:text-white transition-colors">Blog</a>
                 <a href="mailto:self.dealloc@icloud.com" target="_blank"
-                    class="bg-brand-500 text-neutral-900 px-5 py-2 rounded-full font-bold hover:bg-brand-600 transition-all transform hover:scale-105 shadow-lg shadow-brand-500/20">
+                    class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors">
                     Contact
                 </a>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-2xl text-white" onclick="toggleMenu()">
-                <i class="ph ph-list"></i>
-            </button>
+            <button class="md:hidden text-xl text-white" onclick="toggleMenu()" aria-label="Menu"><i class="ph ph-list"></i></button>
         </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu"
-            class="hidden md:hidden absolute w-full bg-neutral-900 border-b border-neutral-700 p-6 flex-col gap-4 shadow-xl">
-            <a href="#skills" class="block text-lg py-2 hover:text-brand-500 text-neutral-200"
-                onclick="toggleMenu()">Expertise</a>
-            <a href="#work" class="block text-lg py-2 hover:text-brand-500 text-neutral-200"
-                onclick="toggleMenu()">Work</a>
-            <a href="#projects" class="block text-lg py-2 hover:text-brand-500 text-neutral-200"
-                onclick="toggleMenu()">Projects</a>
-            <a href="#blog" class="block text-lg py-2 hover:text-brand-500 text-neutral-200"
-                onclick="toggleMenu()">Blog</a>
-            <a href="mailto:self.dealloc@icloud.com"
-                class="w-full bg-brand-500 text-neutral-900 py-3 rounded-xl font-bold mt-2 text-center shadow-lg shadow-brand-500/20">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-surface border-b border-white/10 p-6 flex flex-col gap-4">
+            <a href="#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Expertise</a>
+            <a href="#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Work</a>
+            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Projects</a>
+            <a href="#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Blog</a>
+            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-            <!-- Text Content -->
+    <!-- Hero -->
+    <header class="relative min-h-[90vh] flex items-center pt-20 pb-24 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div class="text-center lg:text-left reveal">
-                <!-- Highlight Badge -->
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/40 border border-brand-500/50 text-xs font-semibold text-brand-400 mb-6 uppercase tracking-wider">
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
-                    </span>
-                        Mobile Application Engineer since 2012
-                </div>
-                <h1 class="text-5xl lg:text-7xl font-display font-bold text-white leading-[1.1] mb-4">
-                    Mobile Application Engineer <br />
-                    <span class="text-gradient">from Hamburg</span>
+                <p class="text-xs font-medium uppercase tracking-[0.2em] text-brand-500/90 mb-6">iOS Engineer since 2012</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.08] mb-6">
+                    Mobile Application Engineer<br /><span class="text-gradient">from Hamburg.</span>
                 </h1>
-                <p class="text-brand-400 font-semibold mb-6 max-w-lg mx-auto lg:mx-0">From zero to App Store</p>
-                <p class="text-lg text-neutral-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                    I build native iOS apps for more than 10 years. I've successfully shipped multiple apps and contributed to multiple open source projects. 
-                    I have expertise in every step of the development cycle, from shaping the idea, prototyping, and design and mockups, to UX and UI, 
+                <p class="text-lg text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
+                    I build native iOS apps for more than 10 years. I've successfully shipped multiple apps and contributed to multiple open source projects.
+                    I have expertise in every step of the development cycle, from shaping the idea, prototyping, and design and mockups, to UX and UI,
                     through implementation and coding, to continuous integration, and deployment.
                 </p>
-                <!-- Social Buttons -->
-                <ul class="flex justify-center lg:justify-start gap-4 mb-8 text-neutral-400 text-2xl">
-                    <li> <a href="https://github.com/SebastianBoldt" target="_blank"
-                            class="hover:text-brand-500 transition-colors" aria-label="GitHub"><i
-                                class="ph-fill ph-github-logo"></i></a></li>
-                    <li> <a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank"
-                            class="hover:text-brand-500 transition-colors" aria-label="LinkedIn"><i
-                                class="ph-fill ph-linkedin-logo"></i></a></li>
-                    <li> <a href="https://medium.com/@sebastianbo" target="_blank"
-                            class="hover:text-brand-500 transition-colors" aria-label="Medium"><i
-                                class="ph-fill ph-medium-logo"></i></a></li>
-                    <li> <a href="https://www.instagram.com/sebastianboldt/" target="_blank"
-                            class="hover:text-brand-500 transition-colors" aria-label="Instagram"><i
-                                class="ph-fill ph-instagram-logo"></i></a></li>
+                <ul class="flex justify-center lg:justify-start gap-6 mb-10 text-white/50 text-xl">
+                    <li><a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white transition-colors" aria-label="GitHub"><i class="ph-fill ph-github-logo"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-white transition-colors" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a></li>
+                    <li><a href="https://stackoverflow.com/users/1448340/sebastian-boldt" target="_blank" class="hover:text-white transition-colors" aria-label="Stack Overflow"><i class="ph-fill ph-stack-overflow-logo"></i></a></li>
+                    <li><a href="https://medium.com/@sebastianbo" target="_blank" class="hover:text-white transition-colors" aria-label="Medium"><i class="ph-fill ph-medium-logo"></i></a></li>
+                    <li><a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-white transition-colors" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a></li>
                 </ul>
-
-                <!-- Core Competencies (Now reflecting Code Quality) -->
-                <div class="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm text-neutral-500">
-                    <div class="flex items-center gap-2">
-                        <i class="ph ph-magic-wand text-lg text-brand-500"></i> Design
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="ph ph-test-tube text-lg text-brand-500"></i> Code
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="ph ph-wrench text-lg text-brand-500"></i> Tooling
-                    </div>
-                </div>
+                <p class="text-sm text-white/40">Design · Code · Tooling</p>
             </div>
-
-            <!-- Hero Image Placeholder (Memoji/Portrait style) -->
-            <div class="relative lg:h-[700px] flex justify-center items-center reveal delay-200">
-                <div class="relative w-72 h-72 lg:w-96 lg:h-96 flex justify-center items-center">
-                    <!-- Placeholder for Memoji/Portrait -->
-                    <img src="Images/memoji.JPG" alt="Sebastian Boldt Portrait Placeholder"
-                        class="object-cover w-full h-full rounded-full shadow-2xl shadow-brand-500/20 border-4 border-brand-500/50 transform rotate-3 hover:rotate-0 transition-transform duration-700"
-                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/f3f4f6/9ca3af?text=Portrait+fehlt'">
-
+            <div class="flex justify-center reveal" style="transition-delay: 0.15s">
+                <div class="relative rounded-full p-[3px] bg-gradient-to-br from-brand-500/60 via-brand-400/30 to-transparent shadow-[0_0_50px_rgba(56,189,248,0.2),0_0_100px_rgba(56,189,248,0.08)]">
+                    <img src="Images/memoji.JPG" alt="Sebastian Boldt"
+                        class="w-64 h-64 lg:w-80 lg:h-80 rounded-full object-cover ring-2 ring-surface"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/1c1c1c/666?text=SB'">
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Core Skills / Expertise Grid -->
-    <div class="border-y border-neutral-700 bg-neutral-800/50 py-10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-sm font-semibold text-neutral-500 uppercase tracking-widest mb-8">Core Skills</p>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-                <div class="flex flex-col items-center gap-3 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-500 group-hover:text-neutral-900 transition-colors">
-                        <i class="ph ph-apple-logo"></i>
-                    </div>
-                    <span class="text-neutral-300 font-medium">Swift & SwiftUI</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-500 group-hover:text-neutral-900 transition-colors">
-                        <i class="ph ph-scroll"></i>
-                    </div>
-                    <span class="text-neutral-300 font-medium">Point-Free Ecosystem</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-500 group-hover:text-neutral-900 transition-colors">
-                        <i class="ph ph-cube"></i>
-                    </div>
-                    <span class="text-neutral-300 font-medium">Modular Architecture</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-500 group-hover:text-neutral-900 transition-colors">
-                        <i class="ph ph-test-tube"></i>
-                    </div>
-                    <span class="text-neutral-300 font-medium">UX and UI Design</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-500 group-hover:text-neutral-900 transition-colors">
-                        <i class="ph ph-robot"></i>
-                    </div>
-                    <span class="text-neutral-300 font-medium">Agentic Coding</span>
-                </div>
+    <!-- Core Skills -->
+    <div class="border-t border-white/10 bg-surface-elevated/50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-10">Core Skills</p>
+            <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white/70 font-medium">
+                <span class="flex items-center gap-2"><i class="ph ph-apple-logo text-brand-400 text-xl"></i> Swift & SwiftUI</span>
+                <span class="flex items-center gap-2"><i class="ph ph-scroll text-brand-400 text-xl"></i> Point-Free Ecosystem</span>
+                <span class="flex items-center gap-2"><i class="ph ph-cube text-brand-400 text-xl"></i> Modular Architecture</span>
+                <span class="flex items-center gap-2"><i class="ph ph-palette text-brand-400 text-xl"></i> UX & UI Design</span>
+                <span class="flex items-center gap-2"><i class="ph ph-robot text-brand-400 text-xl"></i> Agentic Coding</span>
             </div>
         </div>
     </div>
 
-    <!-- Expertise Section (ex-Services) -->
-    <section id="skills" class="py-24 relative bg-neutral-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">What I Do</h2>
-                <p class="text-neutral-400 text-lg">I build iOS apps with a focus on clean architecture, modular design, and maintainability.</p>
-            </div>
+    <!-- Expertise -->
+    <section id="skills" class="py-28 border-t border-white/10 bg-surface-elevated/50 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">What I Do</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Clean architecture, modular design, <span class="text-gradient">maintainability.</span></h2>
+            <p class="text-white/60 max-w-2xl mb-16 reveal">I build iOS apps with a focus on these principles.</p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Service 1: Clean Architecture & TCA -->
-                <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
-                    <div
-                        class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
-                        <i class="ph ph-strategy"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Architecture & Modularity</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed mb-6 flex-grow">
-                        I work primarily with The Composable Architecture (TCA) and the Point-Free ecosystem to build apps that are testable and maintainable. 
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-strategy"></i></div>
+                    <h3 class="text-lg font-display font-semibold text-white mb-3">Architecture & Modularity</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4">
+                        I work primarily with The Composable Architecture (TCA) and the Point-Free ecosystem to build apps that are testable and maintainable.
                         I break apps into modular packages using Swift Package Manager, and I can also set up solid architectures using just SwiftUI and Swift when that's the right approach.
                     </p>
-                    <div class="flex flex-wrap pt-2">
-                        <span class="tag-style">TCA</span>
-                        <span class="tag-style">Swift Package Manager</span>
-                    </div>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">TCA</span><span class="tag-style">SPM</span></div>
                 </div>
-
-                <!-- Service 2: Modern Frameworks & Tech -->
-                <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
-                    <div
-                        class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
-                        <i class="ph ph-device-mobile"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Framework Knowledge</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed mb-6 flex-grow">
-                        I work daily with SwiftUI and have extensive experience with UIKit on large-scale projects. 
+                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-device-mobile"></i></div>
+                    <h3 class="text-lg font-display font-semibold text-white mb-3">Framework Knowledge</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4">
+                        I work daily with SwiftUI and have extensive experience with UIKit on large-scale projects.
                         I can also work with Objective-C when needed for legacy codebases or integrations.
                     </p>
-                    <div class="flex flex-wrap pt-2">
-                        <span class="tag-style">Swift</span>
-                        <span class="tag-style">SwiftUI</span>
-                        <span class="tag-style">Objective-C</span>
-                        <span class="tag-style">UIKit</span>
-                    </div>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">Swift</span><span class="tag-style">SwiftUI</span><span class="tag-style">UIKit</span></div>
                 </div>
-
-                <!-- Service 3: Team & Process Focus -->
-                <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
-                    <div
-                        class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
-                        <i class="ph ph-users"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Team Collaboration & Mentoring</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed mb-6 flex-grow">
-                        I mentor developers and present on iOS topics. I've worked in large international teams with mono-repos and multi-repo setups, 
-                        as well as smaller local teams.
+                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-users"></i></div>
+                    <h3 class="text-lg font-display font-semibold text-white mb-3">Team Collaboration & Mentoring</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4">
+                        I mentor developers and present on iOS topics. I've worked in large international teams with mono-repos and multi-repo setups, as well as smaller local teams.
                     </p>
-                    <div class="flex flex-wrap pt-2">
-                        <span class="tag-style">Large Team Collaboration</span>
-                        <span class="tag-style">CI/CD Management</span>
-                        <span class="tag-style">Release Automation</span>
-                    </div>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">CI/CD</span><span class="tag-style">Release</span></div>
                 </div>
-
-                <!-- Service 4: Agentic Coding -->
-                <div
-                    class="group relative bg-neutral-800 border border-neutral-700 hover:border-brand-500/30 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-brand-500/5 reveal delay-100 flex flex-col">
-                    <div
-                        class="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-400 text-2xl mb-6">
-                        <i class="ph ph-robot"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Agentic Coding</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed mb-6 flex-grow">
-                        I work with AI coding tools like Claude Code, Cursor, and Codex to accelerate development, while using Skills, MCP Servers. 
-                        My years of native iOS experience help me avoid "slop layers" and keep AI-generated code maintainable.
+                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-robot"></i></div>
+                    <h3 class="text-lg font-display font-semibold text-white mb-3">Agentic Coding</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4">
+                        I work with AI coding tools like Claude Code, Cursor, and Codex to accelerate development, while using Skills, MCP Servers. My years of native iOS experience help me keep AI-generated code maintainable.
                     </p>
-                    <div class="flex flex-wrap pt-2">
-                        <span class="tag-style">Claude Code</span>
-                        <span class="tag-style">Cursor</span>
-                        <span class="tag-style">Codex</span>
-                        <span class="tag-style">Skills</span>
-                        <span class="tag-style">MCP Servers</span>
-                    </div>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">Cursor</span><span class="tag-style">Codex</span><span class="tag-style">Skills</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Experience & Education Section (ex-About) -->
-    <section id="work" class="py-24 bg-neutral-900 border-t border-neutral-700">
-        <div class="max-w-7xl mx-auto px-6">
+    <!-- Work -->
+    <section id="work" class="py-28 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Work</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-16 reveal"><span class="text-gradient">Where I've worked.</span></h2>
 
-            <!-- Work Experience -->
-            <div class="max-w-4xl mx-auto reveal mb-16">
-                <h3 class="text-3xl font-display font-bold text-white mb-6 text-center">Work Experience<br><span
-                        class="text-brand-500">Where I've worked.</span></h3>
+            <div class="space-y-4 max-w-3xl">
+                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
+                    <span class="text-sm text-white/50 shrink-0">10/2022 – Present</span>
+                    <div>
+                        <p class="font-semibold text-white">Lead Developer Mobile (iOS) · Aviv</p>
+                        <p class="text-sm text-white/60 mt-1">Apps: <a href="https://apps.apple.com/tt/app/seloger-location-achat-immo/id326883014" target="_blank" class="text-brand-400 hover:text-brand-300 underline">SeLoger</a></p>
+                        <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">~3.5 yrs</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 155k+</span></div>
+                    </div>
+                </div>
+                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
+                    <span class="text-sm text-white/50 shrink-0">04/2016 – 10/2022</span>
+                    <div>
+                        <p class="font-semibold text-white">Software Engineer Mobile (iOS) · Immowelt/Immonet</p>
+                        <p class="text-sm text-white/60 mt-1">Apps: <a href="https://apps.apple.com/ci/app/immowelt-immobilien-suche/id354119842" target="_blank" class="text-brand-400 hover:text-brand-300 underline">Immowelt</a></p>
+                        <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">~6.5 yrs</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.6 · 150k+</span></div>
+                    </div>
+                </div>
+                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
+                    <span class="text-sm text-white/50 shrink-0">02/2015 – 03/2016</span>
+                    <div>
+                        <p class="font-semibold text-white">Mobile Application Developer (iOS) · Fashionfreax</p>
+                        <span class="tag-style mt-2 inline-block">~1 yr</span>
+                    </div>
+                </div>
+                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
+                    <span class="text-sm text-white/50 shrink-0">08/2013 – 10/2014</span>
+                    <div>
+                        <p class="font-semibold text-white">Software Developer (C++ / QT / iOS / Android) · IPT Wismar</p>
+                        <span class="tag-style mt-2 inline-block">~1 yr</span>
+                    </div>
+                </div>
+            </div>
 
+            <div id="education" class="mt-20 pt-16 border-t border-white/10 reveal">
+                <h3 class="text-xl font-display font-semibold text-white mb-4">Education</h3>
+                <p class="text-white font-medium">Master's & Bachelor's in Multimedia Engineering, Hochschule Wismar</p>
+                <p class="text-white/60 text-sm mt-2">Microprocessor technology, image processing, computer graphics, audio, system programming, networking, application development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-28 border-t border-white/10 bg-surface-elevated/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Projects</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
+            <p class="text-white/60 mb-16 reveal">HabitBe, Pianoo, and more.</p>
+
+            <div class="space-y-24">
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">HabitBe</h3>
+                        <p class="text-brand-400 font-medium mb-4">The habit tracker for minimalists.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351</span></div>
+                        <p class="text-white/70 mb-4">A simple weekly habit tracker. No fancy features, just tracking what matters. Built with TCA, Core Data, CloudKit, SwiftUI.</p>
+                        <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-white font-medium">habitbe.app →</a>
+                    </div>
+                    <a href="https://habitbe.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-colors">
+                        <img src="Images/HabitBePreview.png" alt="HabitBe App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=HabitBe'">
+                    </a>
+                </div>
+
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <a href="https://pianoo.app" target="_blank" class="block rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-colors">
+                        <img src="Images/PianooPreview.png" alt="Pianoo App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Pianoo'">
+                    </a>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">Pianoo</h3>
+                        <p class="text-brand-400 font-medium mb-4">Chords. Scales. Progressions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style">Active</span></div>
+                        <p class="text-white/70 mb-4">A music theory app for chords, scales, and progressions. Simple and useful for writing songs or practicing.</p>
+                        <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-white font-medium">pianoo.app →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-24 pt-16 border-t border-white/10 reveal">
+                <h3 class="text-lg font-display font-semibold text-white mb-6">More projects</h3>
                 <div class="space-y-6">
-                    <!-- Item 1: Aviv -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-neutral-800 border border-neutral-700">
-                        <div class="font-bold text-brand-400">10/2022 - Present</div>
-                        <div class="md:col-span-3">
-                            <p class="text-white">Lead Developer Mobile Applications (iOS) - Aviv</p>
-                            <p class="text-neutral-400 text-sm mt-1">
-                                Apps: 
-                                <a href="https://apps.apple.com/tt/app/seloger-location-achat-immo/id326883014" target="_blank" class="hover:text-brand-500 underline">
-                                    SeLoger
-                                </a>
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-2">
-                                <span class="tag-style">~3.5 years</span>
-                                <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">
-                                    <span class="text-yellow-400 mr-1">★</span>
-                                    4.7 · 155,000+ ratings
-                                </span>
-                            </div>
+                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+                        <div>
+                            <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-white hover:text-brand-400">Jelly</a>
+                            <p class="text-sm text-white/60 mt-1">Open-source library for animated view controller transitions in UIKit.</p>
+                            <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Swift</span><span class="tag-style">UIKit</span></div>
                         </div>
+                        <span class="tag-style self-start">Open Source</span>
                     </div>
-                    <!-- Item 2: Immowelt -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-neutral-800 border border-neutral-700">
-                        <div class="font-bold text-brand-400">04/2016 - 10/2022</div>
-                        <div class="md:col-span-3">
-                            <p class="text-white">Software Engineer Mobile Applications (iOS) - Immowelt/Immonet</p>
-                            <p class="text-neutral-400 text-sm mt-1">
-                                Apps: 
-                                <a href="https://apps.apple.com/ci/app/immowelt-immobilien-suche/id354119842" target="_blank" class="hover:text-brand-500 underline">
-                                    Immowelt
-                                </a>
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-2">
-                                <span class="tag-style">~6.5 years</span>
-                                <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">
-                                    <span class="text-yellow-400 mr-1">★</span>
-                                    4.6 · 150,000+ ratings
-                                </span>
-                            </div>
+                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+                        <div>
+                            <a href="https://github.com/SebastianBoldt/Soundrocket" target="_blank" class="font-semibold text-white hover:text-brand-400">Soundrocket</a>
+                            <p class="text-sm text-white/60 mt-1">My first App Store release (2015). Stopped after SoundCloud closed their public API; open-sourced the code.</p>
+                            <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Objective-C</span><span class="tag-style">UIKit</span></div>
                         </div>
+                        <span class="tag-style self-start opacity-70">Inactive · Open Source</span>
                     </div>
-                    <!-- Item 3: Fashionfreax -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-neutral-800 border border-neutral-700">
-                        <div class="font-bold text-brand-400">02/2015 - 03/2016</div>
-                        <div class="md:col-span-3">
-                            <p class="text-white">Mobile Application Developer (iOS) - Fashionfreax</p>
-                            <div class="mt-2">
-                                <span class="tag-style">~1 year</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item 4: IPT Wismar -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-neutral-800 border border-neutral-700">
-                        <div class="font-bold text-brand-400">08/2013 - 10/2014</div>
-                        <div class="md:col-span-3">
-                            <p class="text-white">Software Developer (C++ / QT / iOS / Android) - IPT Wismar</p>
-                            <div class="mt-2">
-                                <span class="tag-style">~1 year</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Education -->
-            <div id="education" class="max-w-4xl mx-auto reveal pt-16 border-t border-neutral-700">
-                <h3 class="text-3xl font-display font-bold text-white mb-6 text-center">Education</h3>
-
-                <div class="bg-neutral-800 border border-neutral-700 rounded-xl p-6 shadow-lg">
-                    <p class="text-lg font-semibold text-white">Master's degree in Multimedia Engineering, Hochschule
-                        Wismar</p>
-                    <p class="text-lg font-semibold text-white">Bachelor's degree in Multimedia Engineering, Hochschule
-                        Wismar</p>
-                    <p class="text-neutral-400 mt-4 text-sm">
-                        My studies covered microprocessor technology, image processing, computer graphics, audio technologies, 
-                        system programming, networking, and application development.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Project Showcase Section -->
-    <section id="projects" class="py-24 bg-neutral-800 border-t border-neutral-700">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Projects</h2>
-                <p class="text-neutral-400 text-lg">These are the apps I've built in my spare time.</p>
-            </div>
+    <!-- Blog -->
+    <section id="blog" class="py-28 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Blog</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Articles on <span class="text-gradient">iOS development.</span></h2>
+            <p class="text-white/60 mb-12 reveal">I haven't written new posts recently—focusing on building apps instead.</p>
 
-            <!-- Item 1: HabitBe (Featured) -->
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-16 reveal mb-24 pb-24 border-b border-neutral-700">
-                <div class="w-full lg:w-1/2">
-                    <h3 class="text-3xl font-display font-bold text-white mb-4">HabitBe<br><span
-                            class="text-brand-500">The habit tracker for minimalists.</span></h3>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">Active</span>
-                        <span class="tag-style">Closed Source</span>
-                        <span class="tag-style">App</span>
-                        <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">
-                            <span class="text-yellow-400 mr-1">★</span>
-                            4.7 · 351 ratings on the App Store
-                        </span>
-                    </div>
-                    <p class="text-neutral-400 text-lg mb-4 leading-relaxed">
-                        A simple weekly habit tracker. No fancy features, just tracking what matters. 
-                        Built with The Composable Architecture, Core Data, CloudKit, and SwiftUI.
-                    </p>
-                    <p class="text-neutral-300 text-sm mb-8">
-                        Visit the app website: 
-                        <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-brand-300 font-medium underline underline-offset-4">
-                            habitbe.app
-                        </a>
-                    </p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tag-style">SwiftUI</span>
-                        <span class="tag-style">The Composable Architecture</span>
-                        <span class="tag-style">CoreData</span>
-                        <span class="tag-style">WatchKit</span>
-                        <span class="tag-style">WidgetKit</span>
-                        <span class="tag-style">Combine</span>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 relative">
-                    <div class="absolute inset-0 bg-brand-500/10 blur-3xl rounded-3xl opacity-60"></div>
-                    <!-- Image container for HabitBe -->
-                    <a href="https://habitbe.app" target="_blank"
-                        class="block relative bg-neutral-900 border border-neutral-700 rounded-2xl aspect-4/3 shadow-xl flex items-center justify-center group overflow-hidden hover:border-brand-500/30 transition-colors">
-                        <img src="Images/HabitBePreview.png" alt="Screenshot der HabitBe App"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x300/f3f4f6/9ca3af?text=HabitBe+fehlt'">
-                    </a>
-                </div>
-            </div>
-
-            <!-- Item 2: Pianoo (Featured) -->
-            <div class="flex flex-col lg:flex-row items-center gap-16 reveal pb-24 border-b border-neutral-700">
-                <div class="w-full lg:w-1/2 relative">
-                    <div class="absolute inset-0 bg-brand-500/10 blur-3xl rounded-3xl opacity-60"></div>
-                    <!-- Image container for Pianoo Hero -->
-                    <a href="https://pianoo.app" target="_blank"
-                        class="block relative bg-neutral-900 border border-neutral-700 rounded-2xl aspect-4/3 shadow-xl overflow-hidden group hover:border-brand-500/30 transition-colors">
-                        <img src="Images/PianooPreview.png" alt="Screenshot der Pianoo App"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x300/171717/f59e0b?text=Pianoo+App+View'">
-                    </a>
-                </div>
-                <div class="w-full lg:w-1/2">
-                    <h3 class="text-3xl font-display font-bold text-white mb-4">Pianoo<br><span
-                            class="text-brand-500">Chords. Scales. Progressions.</span></h3>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">Active</span>
-                        <span class="tag-style">Closed Source</span>
-                        <span class="tag-style">App</span>
-                    </div>
-                    <p class="text-neutral-400 text-lg mb-4 leading-relaxed">
-                        A music theory app I built to help with chords, scales, and progressions. 
-                        Whether you're writing songs or practicing, it's designed to be simple and useful.
-                    </p>
-                    <p class="text-neutral-300 text-sm mb-8">
-                        Visit the app website: 
-                        <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-brand-300 font-medium underline underline-offset-4">
-                            pianoo.app
-                        </a>
-                    </p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tag-style">Swift</span>
-                        <span class="tag-style">SwiftUI</span>
-                        <span class="tag-style">Core MIDI</span>
-                        <span class="tag-style">Core Audio</span>
-                        <span class="tag-style">The Composable Architecture</span>
-                        <span class="tag-style">SQLiteData</span>
-                        <span class="tag-style">CloudKit</span>
-                        <span class="tag-style">In App Purchases</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Other Projects List -->
-            <div class="pt-16 reveal">
-                <h3 class="text-2xl font-display font-bold text-white mb-8 border-b border-neutral-700 pb-4">More
-                    Projects</h3>
-
-                <!-- Project List Item: Jelly -->
-                <div
-                    class="flex flex-col md:flex-row justify-between py-4 border-b border-neutral-800 hover:bg-neutral-800/50 px-3 rounded-lg transition-colors">
-                    <div class="mb-2 md:mb-0">
-                        <a href="https://github.com/SebastianBoldt/Jelly" target="_blank"
-                            class="text-lg font-semibold text-white hover:text-brand-500 transition-colors">Jelly</a>
-                        <p class="text-sm text-neutral-400">
-                            An open-source library I created for animated view controller transitions in UIKit—both interactive and non-interactive.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-2">
-                            <span class="tag-style">Swift</span>
-                            <span class="tag-style">UIKit</span>
-                            <span class="tag-style">Core Animation</span>
-                            <span class="tag-style">Cocoapods</span>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0 text-right">
-                        <span class="tag-style bg-success-500/20 text-success-400 border-success-500/50">Active</span>
-                        <span class="tag-style bg-neutral-700 text-neutral-200">Open Source</span>
-                    </div>
-                </div>
-
-                <!-- Project List Item: Soundrocket -->
-                <div
-                    class="flex flex-col md:flex-row justify-between py-4 border-b border-neutral-800 hover:bg-neutral-800/50 px-3 rounded-lg transition-colors">
-                    <div class="mb-2 md:mb-0">
-                        <a href="https://github.com/SebastianBoldt/Soundrocket" target="_blank"
-                            class="text-lg font-semibold text-white hover:text-brand-500 transition-colors">Soundrocket</a>
-                        <p class="text-sm text-neutral-400">
-                            My first App Store release from 2015. I stopped working on it after SoundCloud closed their public API and the app could no longer function, so I open-sourced the code.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-2">
-                            <span class="tag-style">Objective-C</span>
-                            <span class="tag-style">UIKit</span>
-                            <span class="tag-style">StoreKit</span>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0 text-right">
-                        <span class="tag-style bg-red-800/30 text-red-300 border-red-800">Inactive</span>
-                        <span class="tag-style bg-neutral-700 text-neutral-200">Open Source</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-24 bg-neutral-800 border-t border-neutral-700">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Blog & Publications</h2>
-                <p class="text-neutral-400 text-lg">I haven't written new posts recently—focusing on building apps instead. 
-                    Here are some articles I wrote about iOS development.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog Item 1 -->
-                <a href="https://medium.com/@sebastianbo/learn-and-master-%EF%B8%8F-the-basics-of-structured-concurrent-programming-in-swift-in-15-minutes-5fc700b0a77c"
-                    target="_blank"
-                    class="group block p-5 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-brand-500/50 transition-colors shadow-lg reveal delay-100">
-                    <img src="Images/asyncawaitbanner.png" alt="Async Await Banner"
-                        class="w-full h-36 object-cover rounded-lg mb-4">
-                    <h4 class="text-lg font-semibold text-white group-hover:text-brand-500 transition-colors mb-2">
-                        Learn and Master the Basics of Structured Concurrent Programming
-                    </h4>
-                    <p class="text-xs text-neutral-500">Published on February 22, 2022</p>
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <a href="https://medium.com/@sebastianbo/learn-and-master-%EF%B8%8F-the-basics-of-structured-concurrent-programming-in-swift-in-15-minutes-5fc700b0a77c" target="_blank"
+                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
+                    <img src="Images/asyncawaitbanner.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="font-display font-semibold text-white mb-1">Structured Concurrency in Swift</h4>
+                    <p class="text-xs text-white/50">Feb 2022</p>
                 </a>
-
-                <!-- Blog Item 2 -->
-                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-combine-in-5-minutes-639421268219"
-                    target="_blank"
-                    class="group block p-5 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-brand-500/50 transition-colors shadow-lg reveal delay-200">
-                    <img src="Images/combine.png" alt="Combine Banner" class="w-full h-36 object-cover rounded-lg mb-4">
-                    <h4 class="text-lg font-semibold text-white group-hover:text-brand-500 transition-colors mb-2">
-                        Learn & Master the Basics of Combine in 5 Minutes
-                    </h4>
-                    <p class="text-xs text-neutral-500">Published on March 12, 2020</p>
+                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-combine-in-5-minutes-639421268219" target="_blank"
+                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
+                    <img src="Images/combine.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="font-display font-semibold text-white mb-1">Basics of Combine in 5 Minutes</h4>
+                    <p class="text-xs text-white/50">Mar 2020</p>
                 </a>
-
-                <!-- Blog Item 3 -->
-                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-ios-remote-push-notifications-in-2018-in-under-10-minutes-825ca6bee092"
-                    target="_blank"
-                    class="group block p-5 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-brand-500/50 transition-colors shadow-lg reveal delay-300">
-                    <img src="Images/push.png" alt="Push Notification Banner"
-                        class="w-full h-36 object-cover rounded-lg mb-4">
-                    <h4 class="text-lg font-semibold text-white group-hover:text-brand-500 transition-colors mb-2">
-                        Learn & Master iOS Remote Push Notifications in 10 Minutes
-                    </h4>
-                    <p class="text-xs text-neutral-500">Published on July 10, 2019</p>
+                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-ios-remote-push-notifications-in-2018-in-under-10-minutes-825ca6bee092" target="_blank"
+                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
+                    <img src="Images/push.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <h4 class="font-display font-semibold text-white mb-1">iOS Remote Push Notifications</h4>
+                    <p class="text-xs text-white/50">Jul 2019</p>
                 </a>
-
-                <!-- Item 4, 5, 6 (Simple list style) -->
-                <div class="lg:col-span-3 reveal pt-8 space-y-3">
-                    <p class="text-sm font-semibold text-neutral-400">More Articles:</p>
-                    <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-iglistkit-in-10-minutes-3b9ce8a2632b"
-                        target="_blank"
-                        class="text-neutral-300 hover:text-brand-500 transition-colors block border-b border-neutral-700 pb-2">Learn
-                        & Master the Basics of IGListKit in 10 Minutes (March 6, 2018)</a>
-                    <a href="https://medium.com/ios-os-x-development/learn-and-master-%EF%B8%8F-the-basics-of-rxswift-in-10-minutes-818ea6e0a05b"
-                        target="_blank"
-                        class="text-neutral-300 hover:text-brand-500 transition-colors block border-b border-neutral-700 pb-2">Learn
-                        & Master the Basics of RxSwift in 10 Minutes (March 7, 2017)</a>
-                    <a href="https://medium.com/ios-os-x-development/ios-code-signing-provisioning-in-a-nutshell-d5b247760bef"
-                        target="_blank" class="text-neutral-300 hover:text-brand-500 transition-colors block">iOS Code
-                        Signing and Provisioning in a Nutshell (March 30, 2016)</a>
-                </div>
-
+            </div>
+            <div class="reveal space-y-2">
+                <p class="text-sm text-white/50 mb-4">More:</p>
+                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-iglistkit-in-10-minutes-3b9ce8a2632b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">IGListKit in 10 Minutes (2018)</a>
+                <a href="https://medium.com/ios-os-x-development/learn-and-master-%EF%B8%8F-the-basics-of-rxswift-in-10-minutes-818ea6e0a05b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">RxSwift in 10 Minutes (2017)</a>
+                <a href="https://medium.com/ios-os-x-development/ios-code-signing-provisioning-in-a-nutshell-d5b247760bef" target="_blank" class="block py-2 text-white/70 hover:text-white">iOS Code Signing (2016)</a>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-32 relative overflow-hidden bg-neutral-900 border-t border-neutral-700">
-        <div
-            class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-900/30 via-neutral-900 to-neutral-900 opacity-70">
-        </div>
-
-        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center reveal">
-            <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Get in touch</h2>
-                <p class="text-xl text-neutral-300 mb-10 max-w-2xl mx-auto">
-                If you want to talk about iOS development, my projects, or anything else, feel free to get in touch.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="mailto:self.dealloc@icloud.com"
-                    class="px-10 py-4 bg-brand-500 text-neutral-900 hover:bg-brand-600 rounded-full font-bold text-lg transition-all shadow-lg shadow-brand-500/30 hover:scale-105 flex items-center justify-center gap-2">
-                    <i class="ph ph-envelope-simple font-bold"></i>
-                    Contact me.
-                </a>
-            </div>
+    <!-- CTA -->
+    <section class="py-32 border-t border-white/10">
+        <div class="max-w-3xl mx-auto px-6 text-center reveal">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Get <span class="text-gradient">in touch</span></h2>
+            <p class="text-white/60 mb-10">If you want to talk about iOS development, my projects, or anything else, feel free to reach out.</p>
+            <a href="mailto:self.dealloc@icloud.com"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-white text-surface rounded-full font-semibold hover:bg-white/90 transition-colors">
+                <i class="ph ph-envelope-simple"></i> Contact me
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 border-t border-neutral-700 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-2">
-                    <a href="#" class="text-2xl font-display font-bold text-white flex items-center gap-2 mb-4">
-                        Sebastian Boldt
-                    </a>
-                    <p class="text-neutral-500 max-w-sm text-sm leading-relaxed">
-                        Mobile Application Engineer since 2012.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Expertise</h4>
-                    <ul class="space-y-3 text-neutral-400 text-sm">
-                        <li><a href="#skills" class="hover:text-brand-500 transition-colors">The Composable Architecture</a></li>
-                        <li><a href="#skills" class="hover:text-brand-500 transition-colors">SwiftUI/UIKit</a></li>
-                        <li><a href="#skills" class="hover:text-brand-500 transition-colors">Modular Design (SPM)</a></li>
-                        <li><a href="#skills" class="hover:text-brand-500 transition-colors">Agentic Coding</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Links</h4>
-                    <ul class="space-y-3 text-neutral-400 text-sm">
-                        <li><a href="#work" class="hover:text-brand-500 transition-colors">Work Experience</a></li>
-                        <li><a href="#projects" class="hover:text-brand-500 transition-colors">Projects</a></li>
-                        <li><a href="#blog" class="hover:text-brand-500 transition-colors">Blog Articles</a></li>
-                    </ul>
-                </div>
+    <footer class="border-t border-white/10 py-12">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <a href="#" class="font-display font-semibold text-white">Sebastian Boldt</a>
+                <p class="text-sm text-white/50 mt-1">Mobile Application Engineer since 2012</p>
             </div>
-            <div class="border-t border-neutral-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-neutral-500 text-xs">© 2025 Sebastian Boldt. All rights reserved. | <a
-                        href="privacy.html" class="hover:text-brand-500 transition-colors">Privacy</a></p>
-                <div class="flex gap-6 text-neutral-400">
-                    <a href="https://github.com/SebastianBoldt" target="_blank"
-                        class="hover:text-brand-500 transition-colors"><i
-                            class="ph-fill ph-github-logo text-xl"></i></a>
-                    <a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank"
-                        class="hover:text-brand-500 transition-colors"><i
-                            class="ph-fill ph-linkedin-logo text-xl"></i></a>
-                    <a href="https://www.instagram.com/sebastianboldt/" target="_blank"
-                        class="hover:text-brand-500 transition-colors"><i
-                            class="ph-fill ph-instagram-logo text-xl"></i></a>
-                </div>
+            <nav class="flex gap-8 text-sm text-white/60">
+                <a href="#skills" class="hover:text-white">Expertise</a>
+                <a href="#work" class="hover:text-white">Work</a>
+                <a href="#projects" class="hover:text-white">Projects</a>
+                <a href="#blog" class="hover:text-white">Blog</a>
+            </nav>
+            <div class="flex gap-6 text-white/50">
+                <a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white" aria-label="GitHub"><i class="ph-fill ph-github-logo text-xl"></i></a>
+                <a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-white" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
+                <a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-white" aria-label="Instagram"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
             </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/40">
+            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70">Privacy</a>
         </div>
     </footer>
 
