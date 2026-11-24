@@ -92,10 +92,10 @@
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="#" class="text-lg font-display font-semibold text-white tracking-tight">sebastianboldt.io</a>
             <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/60">
+                <a href="#projects" class="hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
                 <a href="#skills" class="hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a>
                 <a href="#work" class="hover:text-white transition-colors" data-i18n="nav.work">Work</a>
                 <a href="#testimonials" class="hover:text-white transition-colors" data-i18n="nav.testimonials">Testimonials</a>
-                <a href="#projects" class="hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
                 <a href="#blog" class="hover:text-white transition-colors" data-i18n="nav.blog">Blog</a>
                 <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
                     <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
@@ -115,10 +115,10 @@
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-surface border-b border-white/10 p-6 flex flex-col gap-4">
+            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
             <a href="#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.expertise">Expertise</a>
             <a href="#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.work">Work</a>
             <a href="#testimonials" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.testimonials">Testimonials</a>
-            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
             <a href="#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.blog">Blog</a>
             <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center" data-i18n="nav.contact">Contact</a>
         </div>
@@ -167,6 +167,94 @@
             </div>
         </div>
     </div>
+
+    <!-- Projects -->
+    <section id="projects" class="py-28 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="projects.label">Projects</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="projects.heading">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
+            <p class="text-white/60 mb-16 reveal" data-i18n="projects.intro">HabitBe, Pianoo, Gio+, and more.</p>
+
+            <div class="space-y-24">
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">HabitBe</h3>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.habitbeTagline">The habit tracker for minimalists.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351 Reviews</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.habitbeDesc">A simple weekly habit tracker without extra features. Built with TCA, Core Data, CloudKit and SwiftUI.</p>
+                        <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-white font-medium">habitbe.app →</a>
+                    </div>
+                    <a href="https://habitbe.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
+                        <img src="Images/HabitBePreview.png" alt="HabitBe App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=HabitBe'">
+                    </a>
+                </div>
+
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <a href="https://pianoo.app" target="_blank" class="block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
+                        <img src="Images/PianooPreview.png" alt="Pianoo App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Pianoo'">
+                    </a>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">Pianoo</h3>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.pianooTagline">Chords. Scales. Progressions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.pianooDesc">A music theory app for chords, scales and progressions, made for writing songs and practicing.</p>
+                        <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-white font-medium">pianoo.app →</a>
+                    </div>
+                </div>
+
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">Gio+</h3>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.gioTagline">Measure your range of motion.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.comingSoon">Coming soon</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.gioDesc">Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and tracks your recovery over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.</p>
+                    </div>
+                    <div class="order-1 lg:order-2 rounded-2xl overflow-hidden">
+                        <img src="Images/GioPlusPreview.png" alt="Gio+ App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Gio%2B'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-24 pt-16 border-t border-white/10 reveal">
+                <h3 class="text-lg font-display font-semibold text-white mb-6" data-i18n="projects.moreTitle">More projects</h3>
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+                        <div class="flex gap-4">
+                            <div class="shrink-0">
+                                <img src="Images/Jelly.png" alt="Jelly library" class="w-14 h-14 rounded-xl object-cover"
+                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=J';">
+                            </div>
+                            <div>
+                                <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-white hover:text-brand-400">Jelly</a>
+                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.jellyDesc">Open-source library for animated view controller transitions in UIKit.</p>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <span class="tag-style">Swift</span>
+                                    <span class="tag-style">UIKit</span>
+                                    <span class="tag-style"><span class="text-amber-400 mr-1">★</span>2.5k+ stars</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="tag-style self-start" data-i18n="projects.openSource">Open Source</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+                        <div class="flex gap-4">
+                            <div class="shrink-0">
+                                <img src="Images/Soundrocket.png" alt="Soundrocket app icon" class="w-14 h-14 rounded-xl object-cover"
+                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=SR';">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-white">Soundrocket</p>
+                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.soundrocketDesc">My first App Store release (2015), a SoundCloud client I discontinued after SoundCloud shut down its public API. The project is private now.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Objective-C</span><span class="tag-style">UIKit</span></div>
+                            </div>
+                        </div>
+                        <span class="tag-style self-start opacity-70" data-i18n="projects.inactive">Inactive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Expertise -->
     <section id="skills" class="py-28 border-t border-white/10 relative">
@@ -313,94 +401,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="py-28 border-t border-white/10">
-        <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="projects.label">Projects</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="projects.heading">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
-            <p class="text-white/60 mb-16 reveal" data-i18n="projects.intro">HabitBe, Pianoo, Gio+, and more.</p>
-
-            <div class="space-y-24">
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">HabitBe</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.habitbeTagline">The habit tracker for minimalists.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351 Reviews</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.habitbeDesc">A simple weekly habit tracker without extra features. Built with TCA, Core Data, CloudKit and SwiftUI.</p>
-                        <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-white font-medium">habitbe.app →</a>
-                    </div>
-                    <a href="https://habitbe.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
-                        <img src="Images/HabitBePreview.png" alt="HabitBe App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=HabitBe'">
-                    </a>
-                </div>
-
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <a href="https://pianoo.app" target="_blank" class="block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
-                        <img src="Images/PianooPreview.png" alt="Pianoo App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Pianoo'">
-                    </a>
-                    <div>
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">Pianoo</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.pianooTagline">Chords. Scales. Progressions.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.pianooDesc">A music theory app for chords, scales and progressions, made for writing songs and practicing.</p>
-                        <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-white font-medium">pianoo.app →</a>
-                    </div>
-                </div>
-
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">Gio+</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.gioTagline">Measure your range of motion.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.comingSoon">Coming soon</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.gioDesc">Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and tracks your recovery over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.</p>
-                    </div>
-                    <div class="order-1 lg:order-2 rounded-2xl overflow-hidden">
-                        <img src="Images/GioPlusPreview.png" alt="Gio+ App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Gio%2B'">
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-24 pt-16 border-t border-white/10 reveal">
-                <h3 class="text-lg font-display font-semibold text-white mb-6" data-i18n="projects.moreTitle">More projects</h3>
-                <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
-                        <div class="flex gap-4">
-                            <div class="shrink-0">
-                                <img src="Images/Jelly.png" alt="Jelly library" class="w-14 h-14 rounded-xl object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=J';">
-                            </div>
-                            <div>
-                                <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-white hover:text-brand-400">Jelly</a>
-                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.jellyDesc">Open-source library for animated view controller transitions in UIKit.</p>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="tag-style">Swift</span>
-                                    <span class="tag-style">UIKit</span>
-                                    <span class="tag-style"><span class="text-amber-400 mr-1">★</span>2.5k+ stars</span>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="tag-style self-start" data-i18n="projects.openSource">Open Source</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
-                        <div class="flex gap-4">
-                            <div class="shrink-0">
-                                <img src="Images/Soundrocket.png" alt="Soundrocket app icon" class="w-14 h-14 rounded-xl object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=SR';">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-white">Soundrocket</p>
-                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.soundrocketDesc">My first App Store release (2015), a SoundCloud client I discontinued after SoundCloud shut down its public API. The project is private now.
-                                </p>
-                                <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Objective-C</span><span class="tag-style">UIKit</span></div>
-                            </div>
-                        </div>
-                        <span class="tag-style self-start opacity-70" data-i18n="projects.inactive">Inactive</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Blog -->
     <section id="blog" class="py-28 border-t border-white/10 bg-surface-elevated/50">
         <div class="max-w-6xl mx-auto px-6">
@@ -457,10 +457,10 @@
                 <p class="text-sm text-white/50 mt-1" data-i18n="footer.tagline">Mobile Application Engineer since 2012</p>
             </div>
             <nav class="flex gap-8 text-sm text-white/60">
+                <a href="#projects" class="hover:text-white" data-i18n="nav.projects">Projects</a>
                 <a href="#skills" class="hover:text-white" data-i18n="nav.expertise">Expertise</a>
                 <a href="#work" class="hover:text-white" data-i18n="nav.work">Work</a>
                 <a href="#testimonials" class="hover:text-white" data-i18n="nav.testimonials">Testimonials</a>
-                <a href="#projects" class="hover:text-white" data-i18n="nav.projects">Projects</a>
                 <a href="#blog" class="hover:text-white" data-i18n="nav.blog">Blog</a>
             </nav>
             <div class="flex gap-6 text-white/50">
