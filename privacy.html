@@ -1,9 +1,28 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy – Sebastian Boldt</title>
+    <title>Privacy Policy - Sebastian Boldt</title>
+    <script>
+        (function () {
+            var SUPPORTED = ['de', 'en'];
+            var stored = null;
+            try { stored = localStorage.getItem('lang'); } catch (_) {}
+            if (SUPPORTED.indexOf(stored) !== -1) {
+                document.documentElement.lang = stored;
+                return;
+            }
+            var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+            for (var i = 0; i < langs.length; i++) {
+                if (langs[i] && langs[i].toLowerCase().indexOf('de') === 0) {
+                    document.documentElement.lang = 'de';
+                    return;
+                }
+            }
+            document.documentElement.lang = 'en';
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -27,28 +46,39 @@
     </script>
     <style>
         .glass { background: rgba(10,10,10,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .lang-btn-active { background: rgba(56, 189, 248, 0.1); color: #7dd3fc; }
     </style>
 </head>
-<body class="bg-surface text-white/90 font-sans text-base antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden">
+<body class="bg-surface text-white/90 font-sans text-base antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden" data-page="privacy">
 
     <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="index.html" class="text-lg font-display font-semibold text-white tracking-tight">sebastianboldt.io</a>
             <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/60">
-                <a href="index.html#skills" class="hover:text-white transition-colors">Expertise</a>
-                <a href="index.html#work" class="hover:text-white transition-colors">Work</a>
-                <a href="index.html#projects" class="hover:text-white transition-colors">Projects</a>
-                <a href="index.html#blog" class="hover:text-white transition-colors">Blog</a>
-                <a href="mailto:self.dealloc@icloud.com" target="_blank" class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors">Contact</a>
+                <a href="index.html#skills" class="hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a>
+                <a href="index.html#work" class="hover:text-white transition-colors" data-i18n="nav.work">Work</a>
+                <a href="index.html#projects" class="hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
+                <a href="index.html#blog" class="hover:text-white transition-colors" data-i18n="nav.blog">Blog</a>
+                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
+                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
+                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+                </div>
+                <a href="mailto:self.dealloc@icloud.com" target="_blank" class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors" data-i18n="nav.contact">Contact</a>
             </div>
-            <button class="md:hidden text-xl text-white" onclick="toggleMenu()" aria-label="Menu"><i class="ph ph-list"></i></button>
+            <div class="md:hidden flex items-center gap-4">
+                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
+                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
+                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+                </div>
+                <button class="text-xl text-white" onclick="toggleMenu()" data-i18n-attr="aria-label:nav.menuLabel" aria-label="Menu"><i class="ph ph-list"></i></button>
+            </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-surface border-b border-white/10 p-6 flex flex-col gap-4">
-            <a href="index.html#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Expertise</a>
-            <a href="index.html#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Work</a>
-            <a href="index.html#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Projects</a>
-            <a href="index.html#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Blog</a>
-            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center">Contact</a>
+            <a href="index.html#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.expertise">Expertise</a>
+            <a href="index.html#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.work">Work</a>
+            <a href="index.html#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
+            <a href="index.html#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.blog">Blog</a>
+            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center" data-i18n="nav.contact">Contact</a>
         </div>
     </nav>
 
@@ -97,13 +127,13 @@
                 <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">5. Rights of the data subject</h2>
                 <p>Each data subject has rights under the GDPR, including the right of confirmation, right of access, right to rectification, right to erasure (right to be forgotten), right of restriction of processing, right to data portability, right to object, rights related to automated decision-making and profiling, and right to withdraw data protection consent. To exercise any of these rights, the data subject may at any time contact the controller (sebastian boldt, self.dealloc@icloud.com).</p>
 
-                <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">6.–12. Data protection provisions (third-party services)</h2>
+                <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">6. to 12. Data protection provisions (third-party services)</h2>
                 <p>This website may integrate components of Instagram, LinkedIn, Twitter/XING, SoundCloud, GitHub, Medium, and Stack Overflow. With each call-up to a page containing such a component, the respective provider may receive information about the visit. If the data subject is logged in to the service at the same time, the provider may associate the visit with the user account. Further information and the applicable data protection provisions of these services can be found on their respective websites. If such transmission is not desirable, the data subject may log out from the respective account before visiting this website.</p>
 
                 <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">13. Legal basis for the processing</h2>
                 <p>Art. 6(1) lit. a GDPR serves as the legal basis for processing operations for which we obtain consent. Where processing is necessary for the performance of a contract, the processing is based on Article 6(1) lit. b GDPR. Where our company is subject to a legal obligation requiring the processing of personal data, the processing is based on Art. 6(1) lit. c GDPR. In rare cases, processing may be necessary to protect vital interests (Art. 6(1) lit. d GDPR). Finally, processing operations may be based on Article 6(1) lit. f GDPR (legitimate interests), where not overridden by the interests or fundamental rights of the data subject.</p>
 
-                <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">14.–18. Further provisions</h2>
+                <h2 class="text-xl font-display font-semibold text-white mt-12 mb-4">14. to 18. Further provisions</h2>
                 <p>Further provisions cover Stack Overflow integration, legitimate interests of the controller, storage periods, provision of personal data as statutory or contractual requirement, and automated decision-making. As a responsible company, we do not use automatic decision-making or profiling. For the full text of these sections, please contact the controller. The criteria used to determine the period of storage of personal data is the respective statutory retention period. After expiration of that period, the corresponding data is routinely deleted, as long as it is no longer necessary for the fulfillment of the contract or the initiation of a contract.</p>
             </div>
         </div>
@@ -113,13 +143,13 @@
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
                 <a href="index.html" class="font-display font-semibold text-white">Sebastian Boldt</a>
-                <p class="text-sm text-white/50 mt-1">Mobile Application Engineer since 2012</p>
+                <p class="text-sm text-white/50 mt-1" data-i18n="footer.tagline">Mobile Application Engineer since 2012</p>
             </div>
             <nav class="flex gap-8 text-sm text-white/60">
-                <a href="index.html#skills" class="hover:text-white">Expertise</a>
-                <a href="index.html#work" class="hover:text-white">Work</a>
-                <a href="index.html#projects" class="hover:text-white">Projects</a>
-                <a href="index.html#blog" class="hover:text-white">Blog</a>
+                <a href="index.html#skills" class="hover:text-white" data-i18n="nav.expertise">Expertise</a>
+                <a href="index.html#work" class="hover:text-white" data-i18n="nav.work">Work</a>
+                <a href="index.html#projects" class="hover:text-white" data-i18n="nav.projects">Projects</a>
+                <a href="index.html#blog" class="hover:text-white" data-i18n="nav.blog">Blog</a>
             </nav>
             <div class="flex gap-6 text-white/50">
                 <a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white" aria-label="GitHub"><i class="ph-fill ph-github-logo text-xl"></i></a>
@@ -128,10 +158,11 @@
             </div>
         </div>
         <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/40">
-            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70">Privacy</a> · <a href="index.html" class="hover:text-white/70">Home</a>
+            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70" data-i18n="footer.privacy">Privacy</a> · <a href="index.html" class="hover:text-white/70" data-i18n="footer.home">Home</a>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script>
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');

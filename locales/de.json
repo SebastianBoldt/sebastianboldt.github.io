@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "Sebastian Boldt - Mobile Application Engineer",
+    "privacyTitle": "Datenschutz - Sebastian Boldt"
+  },
+  "nav": {
+    "expertise": "Expertise",
+    "work": "Beruf",
+    "testimonials": "Referenzen",
+    "projects": "Projekte",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "menuLabel": "Menü",
+    "languageLabel": "Sprache"
+  },
+  "hero": {
+    "eyebrow": "iOS Engineer seit 2012",
+    "title": "Mobile Application Engineer<br /><span class=\"text-gradient\">aus Hamburg.</span>",
+    "bio": "Seit über 10 Jahren entwickle ich native iOS-Apps. Ich habe mehrere Apps veröffentlicht und zu mehreren Open-Source-Projekten beigetragen. Ich übernehme jeden Schritt der Entwicklung, von der Idee und dem Prototyping über UX, UI und Barrierefreiheit bis zu Implementierung, Continuous Integration und Deployment.",
+    "tagline": "Design · Code · Tooling"
+  },
+  "coreSkills": {
+    "label": "Kernkompetenzen",
+    "swift": "Swift & SwiftUI / Objective-C & UIKit",
+    "apple": "Tiefes Wissen im Apple-Ökosystem",
+    "pointFree": "Point-Free Ecosystem (TCA, SQLiteData, Sharing etc.)",
+    "architecture": "Software-Architektur",
+    "uxui": "UX & UI",
+    "agentic": "Agentic Coding"
+  },
+  "expertise": {
+    "label": "Was ich mache",
+    "heading": "Saubere Architektur, modulares Design, <span class=\"text-gradient\">Wartbarkeit.</span>",
+    "intro": "Nach diesen Prinzipien entwickle ich iOS-Apps.",
+    "architectureTitle": "Architektur & Modularität",
+    "architectureBody": "Ich habe mit MVVM, VIPER und klassischeren Mustern gearbeitet. Heute nutze ich vor allem The Composable Architecture (TCA) und das Point‑Free-Ökosystem, also einen Redux-ähnlichen Ansatz. Mit dem Swift Package Manager ziehe ich klare Grenzen zwischen Modulen, damit Features wiederverwendbar bleiben und sich leicht herauslösen lassen. Unabhängig vom Muster injiziere ich Abhängigkeiten explizit, damit der Code testbar und leicht änderbar bleibt.",
+    "frameworksTitle": "Framework-Kenntnisse",
+    "frameworksBody": "Ich arbeite täglich mit SwiftUI und habe viel Erfahrung mit UIKit aus großen Projekten. Außerdem habe ich mit AudioKit, StoreKit, CloudKit, WidgetKit, MapKit, Core Data und den iOS Accessibility APIs gearbeitet. Wenn eine Legacy-Codebasis gepflegt oder erweitert werden muss, arbeite ich auch in Objective-C.",
+    "teamTitle": "Teamarbeit & Mentoring",
+    "teamBody": "Ich habe Entwickler als Mentor begleitet und Vorträge zu iOS-Themen gehalten. Ich habe in großen internationalen Teams mit Mono- und Multi-Repo-Setups gearbeitet und in kleineren lokalen Teams. Builds und Releases habe ich mit Xcode Cloud, Bitrise und Jenkins automatisiert.",
+    "agenticTitle": "Agentic Coding",
+    "agenticBody": "Ich nutze KI-Coding-Tools wie Claude Code, Cursor und Codex zusammen mit Skills und MCP-Servern, um schneller zu entwickeln. Meine langjährige native iOS-Erfahrung hilft mir, den „Slop-Layer“ fernzuhalten und KI-generierten Code wartbar zu halten."
+  },
+  "work": {
+    "label": "Beruf",
+    "heading": "<span class=\"text-gradient\">Wo ich gearbeitet habe.</span>",
+    "present": "Heute",
+    "years35": "~3,5 J.",
+    "years65": "~6,5 J.",
+    "year1": "~1 J.",
+    "educationTitle": "Ausbildung",
+    "educationDegree": "Master & Bachelor Multimedia Engineering, Hochschule Wismar",
+    "educationDetails": "Mikroprozessortechnik, Bildverarbeitung, Computergrafik, Audio, Systemprogrammierung, Netzwerke, Anwendungsentwicklung."
+  },
+  "testimonials": {
+    "label": "Was andere sagen",
+    "heading": "Was andere <span class=\"text-gradient\">sagen.</span>",
+    "footnote": "Weitere Rückmeldungen von Kolleginnen und Kollegen werden hier nach und nach ergänzt."
+  },
+  "projects": {
+    "label": "Projekte",
+    "heading": "Apps, die ich <span class=\"text-gradient\">in meiner Freizeit</span> gebaut habe.",
+    "intro": "HabitBe, Pianoo, Gio+ und mehr.",
+    "habitbeTagline": "Der Habit Tracker für Minimalisten.",
+    "active": "Aktiv",
+    "habitbeDesc": "Ein einfacher wöchentlicher Habit Tracker ohne Zusatzfunktionen. Gebaut mit TCA, Core Data, CloudKit und SwiftUI.",
+    "pianooTagline": "Akkorde. Tonleitern. Progressionen.",
+    "pianooDesc": "Eine Musiktheorie-App für Akkorde, Tonleitern und Progressionen, gedacht fürs Songwriting und Üben.",
+    "gioTagline": "Miss deine Beweglichkeit.",
+    "comingSoon": "Demnächst",
+    "gioDesc": "Gio+ misst mit der Kamera, wie weit sich Ellbogen, Knie oder Schulter beugen und strecken lassen, und zeigt deinen Fortschritt in der Reha. Gebaut mit TCA, SQLiteData, Vision, WidgetKit, App Intents und SwiftUI.",
+    "moreTitle": "Weitere Projekte",
+    "jellyDesc": "Open-Source-Bibliothek für animierte View-Controller-Transitions in UIKit.",
+    "openSource": "Open Source",
+    "soundrocketDesc": "Mein erster App-Store-Release (2015), ein SoundCloud-Client, den ich eingestellt habe, nachdem SoundCloud die öffentliche API abgeschaltet hatte. Das Projekt ist inzwischen privat.",
+    "inactive": "Inaktiv"
+  },
+  "blog": {
+    "label": "Blog",
+    "heading": "Artikel über <span class=\"text-gradient\">iOS-Entwicklung.</span>",
+    "intro": "Neue Beiträge habe ich in letzter Zeit nicht geschrieben, weil ich stattdessen Apps gebaut habe.",
+    "more": "Mehr:"
+  },
+  "cta": {
+    "heading": "Kontakt <span class=\"text-gradient\">aufnehmen</span>",
+    "body": "Wenn Sie über iOS-Entwicklung oder meine Projekte sprechen möchten, schreiben Sie mir.",
+    "button": "Kontakt aufnehmen"
+  },
+  "footer": {
+    "tagline": "Mobile Application Engineer seit 2012",
+    "privacy": "Datenschutz",
+    "home": "Startseite"
+  }
+}

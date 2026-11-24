@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sebastian Boldt - Mobile Application Engineer</title>
+    <script>
+        (function () {
+            var SUPPORTED = ['de', 'en'];
+            var stored = null;
+            try { stored = localStorage.getItem('lang'); } catch (_) {}
+            if (SUPPORTED.indexOf(stored) !== -1) {
+                document.documentElement.lang = stored;
+                return;
+            }
+            var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+            for (var i = 0; i < langs.length; i++) {
+                if (langs[i] && langs[i].toLowerCase().indexOf('de') === 0) {
+                    document.documentElement.lang = 'de';
+                    return;
+                }
+            }
+            document.documentElement.lang = 'en';
+        })();
+    </script>
 
     <!-- Google Fonts: Syne (Display) & DM Sans (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,6 +80,7 @@
         .tag-style { display: inline-flex; align-items: center; font-size: 0.7rem; font-weight: 500; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.08); margin: 0.1rem; }
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        .lang-btn-active { background: rgba(56, 189, 248, 0.1); color: #7dd3fc; }
     </style>
 </head>
 
@@ -72,25 +92,35 @@
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="#" class="text-lg font-display font-semibold text-white tracking-tight">sebastianboldt.io</a>
             <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/60">
-                <a href="#skills" class="hover:text-white transition-colors">Expertise</a>
-                <a href="#work" class="hover:text-white transition-colors">Work</a>
-                <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
-                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
-                <a href="#blog" class="hover:text-white transition-colors">Blog</a>
+                <a href="#skills" class="hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a>
+                <a href="#work" class="hover:text-white transition-colors" data-i18n="nav.work">Work</a>
+                <a href="#testimonials" class="hover:text-white transition-colors" data-i18n="nav.testimonials">Testimonials</a>
+                <a href="#projects" class="hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
+                <a href="#blog" class="hover:text-white transition-colors" data-i18n="nav.blog">Blog</a>
+                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
+                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
+                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+                </div>
                 <a href="mailto:self.dealloc@icloud.com" target="_blank"
-                    class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors">
+                    class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors" data-i18n="nav.contact">
                     Contact
                 </a>
             </div>
-            <button class="md:hidden text-xl text-white" onclick="toggleMenu()" aria-label="Menu"><i class="ph ph-list"></i></button>
+            <div class="md:hidden flex items-center gap-4">
+                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
+                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
+                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+                </div>
+                <button class="text-xl text-white" onclick="toggleMenu()" data-i18n-attr="aria-label:nav.menuLabel" aria-label="Menu"><i class="ph ph-list"></i></button>
+            </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-surface border-b border-white/10 p-6 flex flex-col gap-4">
-            <a href="#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Expertise</a>
-            <a href="#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Work</a>
-            <a href="#testimonials" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Testimonials</a>
-            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Projects</a>
-            <a href="#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()">Blog</a>
-            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center">Contact</a>
+            <a href="#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.expertise">Expertise</a>
+            <a href="#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.work">Work</a>
+            <a href="#testimonials" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.testimonials">Testimonials</a>
+            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
+            <a href="#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.blog">Blog</a>
+            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center" data-i18n="nav.contact">Contact</a>
         </div>
     </nav>
 
@@ -98,14 +128,11 @@
     <header class="relative min-h-[90vh] flex items-center pt-20 pb-24 overflow-hidden bg-surface">
         <div class="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div class="text-center lg:text-left reveal">
-                <p class="text-xs font-medium uppercase tracking-[0.2em] text-brand-500/90 mb-6">iOS Engineer since 2012</p>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.08] mb-6">
+                <p class="text-xs font-medium uppercase tracking-[0.2em] text-brand-500/90 mb-6" data-i18n="hero.eyebrow">iOS Engineer since 2012</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.08] mb-6" data-i18n-html="hero.title">
                     Mobile Application Engineer<br /><span class="text-gradient">from Hamburg.</span>
                 </h1>
-                <p class="text-lg text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
-                    I build native iOS apps for more than 10 years. I've successfully shipped several apps and contributed to multiple open source projects.
-                    I have expertise in every step of the development cycle, from shaping the idea, prototyping, providing proper accessibility, to UX and UI,
-                    through implementation and coding, to continuous integration, and deployment.
+                <p class="text-lg text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10" data-i18n="hero.bio">I have been building native iOS apps for more than 10 years. I have shipped several apps and contributed to multiple open source projects. I work on every step of development, from the idea and prototyping through UX, UI and accessibility to implementation, continuous integration and deployment.
                 </p>
                 <ul class="flex justify-center lg:justify-start gap-6 mb-10 text-white/50 text-xl">
                     <li><a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white transition-colors" aria-label="GitHub"><i class="ph-fill ph-github-logo"></i></a></li>
@@ -114,7 +141,7 @@
                     <li><a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-white transition-colors" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a></li>
                     <li><a href="https://open.spotify.com/artist/10m1VL1DyqBfIJw54rOefh" target="_blank" class="hover:text-white transition-colors" aria-label="Spotify"><i class="ph-fill ph-spotify-logo"></i></a></li>
                 </ul>
-                <p class="text-sm text-white/40">Design · Code · Tooling</p>
+                <p class="text-sm text-white/40" data-i18n="hero.tagline">Design · Code · Tooling</p>
             </div>
             <div class="flex justify-center reveal" style="transition-delay: 0.15s">
                 <div class="relative rounded-full p-[3px] bg-gradient-to-br from-brand-500/60 via-brand-400/30 to-transparent shadow-[0_0_50px_rgba(56,189,248,0.2),0_0_100px_rgba(56,189,248,0.08)]">
@@ -129,14 +156,14 @@
     <!-- Core Skills -->
     <div class="border-t border-white/10 bg-surface-elevated/50 py-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-10">Core Skills</p>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-10" data-i18n="coreSkills.label">Core Skills</p>
             <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white/70 font-medium">
-                <span class="flex items-center gap-2"><i class="ph ph-apple-logo text-brand-400 text-xl"></i> Swift & SwiftUI / Objective-C & UIKit</span>
-                <span class="flex items-center gap-2"><i class="ph ph-globe-hemisphere-west text-brand-400 text-xl"></i> Deep knowledge of the Apple ecosystem</span>
-                <span class="flex items-center gap-2"><i class="ph ph-scroll text-brand-400 text-xl"></i> Point-Free Ecosystem (TCA, SQLiteData, Sharing etc.)</span>
-                <span class="flex items-center gap-2"><i class="ph ph-cube text-brand-400 text-xl"></i> Software Architecture</span>
-                <span class="flex items-center gap-2"><i class="ph ph-palette text-brand-400 text-xl"></i> UX & UI</span>
-                <span class="flex items-center gap-2"><i class="ph ph-robot text-brand-400 text-xl"></i> Agentic Coding</span>
+                <span class="flex items-center gap-2"><i class="ph ph-apple-logo text-brand-400 text-xl"></i> <span data-i18n="coreSkills.swift">Swift & SwiftUI / Objective-C & UIKit</span></span>
+                <span class="flex items-center gap-2"><i class="ph ph-globe-hemisphere-west text-brand-400 text-xl"></i> <span data-i18n="coreSkills.apple">Deep knowledge of the Apple ecosystem</span></span>
+                <span class="flex items-center gap-2"><i class="ph ph-scroll text-brand-400 text-xl"></i> <span data-i18n="coreSkills.pointFree">Point-Free Ecosystem (TCA, SQLiteData, Sharing etc.)</span></span>
+                <span class="flex items-center gap-2"><i class="ph ph-cube text-brand-400 text-xl"></i> <span data-i18n="coreSkills.architecture">Software Architecture</span></span>
+                <span class="flex items-center gap-2"><i class="ph ph-palette text-brand-400 text-xl"></i> <span data-i18n="coreSkills.uxui">UX & UI</span></span>
+                <span class="flex items-center gap-2"><i class="ph ph-robot text-brand-400 text-xl"></i> <span data-i18n="coreSkills.agentic">Agentic Coding</span></span>
             </div>
         </div>
     </div>
@@ -144,18 +171,15 @@
     <!-- Expertise -->
     <section id="skills" class="py-28 border-t border-white/10 relative">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">What I Do</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Clean architecture, modular design, <span class="text-gradient">maintainability.</span></h2>
-            <p class="text-white/60 max-w-2xl mb-16 reveal">I build iOS apps with a focus on these principles.</p>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="expertise.label">What I Do</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="expertise.heading">Clean architecture, modular design, <span class="text-gradient">maintainability.</span></h2>
+            <p class="text-white/60 max-w-2xl mb-16 reveal" data-i18n="expertise.intro">I build iOS apps with a focus on these principles.</p>
 
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
                     <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-strategy"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3">Architecture & Modularity</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4">
-                        I’m comfortable working with different iOS architectures like MVVM, VIPER, and more traditional patterns, but today I mostly use a Redux-style approach with The Composable Architecture (TCA) and the Point‑Free ecosystem.
-                        I use Swift Package Manager to create clear boundaries between modules so features stay reusable and easy to slice out.
-                        Regardless of the pattern, I focus on clear dependency injection so that code stays modular, testable, and easy to evolve.
+                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.architectureTitle">Architecture & Modularity</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.architectureBody">I have worked with MVVM, VIPER and more traditional patterns. Today I mostly use The Composable Architecture (TCA) and the Point‑Free ecosystem, a Redux-style approach. With Swift Package Manager I draw clear boundaries between modules, so features stay reusable and easy to slice out. Whatever the pattern, I inject dependencies explicitly so the code stays testable and easy to change.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span class="tag-style">TCA</span>
@@ -168,11 +192,8 @@
                 </div>
                 <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
                     <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-device-mobile"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3">Framework Knowledge</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4">
-                        I work daily with SwiftUI and have extensive experience with UIKit on large-scale projects.
-                        Over the years I’ve worked with frameworks like AudioKit, StoreKit, CloudKit, WidgetKit MapKit, Core Data, and also things like the iOS Accessibility APIs.
-                        I can also work with Objective-C when needed for maintaining and extending legacy codebases, and I adapt quickly to new frameworks and domains.
+                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.frameworksTitle">Framework Knowledge</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.frameworksBody">I work with SwiftUI every day and have a lot of UIKit experience from large projects. I have also worked with AudioKit, StoreKit, CloudKit, WidgetKit, MapKit, Core Data and the iOS Accessibility APIs. When a legacy codebase needs maintaining or extending, I work in Objective-C too.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span class="tag-style">Swift</span>
@@ -183,10 +204,8 @@
                 </div>
                 <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
                     <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-users"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3">Team Collaboration & Mentoring</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4">
-                        I mentored developers and presented on iOS topics. I've worked in large international teams with mono-repos and multi-repo setups, as well as smaller local teams.
-                        I've also worked with CI/CD tools like Xcode Cloud, Bitrise, and Jenkins to automate the build and release process.
+                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.teamTitle">Team Collaboration & Mentoring</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.teamBody">I have mentored developers and given talks on iOS topics. I have worked in large international teams with mono-repo and multi-repo setups, and in smaller local teams. I have automated builds and releases with Xcode Cloud, Bitrise and Jenkins.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span class="tag-style">CI/CD</span>
@@ -197,9 +216,8 @@
                 </div>
                 <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
                     <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-robot"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3">Agentic Coding</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4">
-                        I work with AI coding tools like Claude Code, Cursor, and Codex to accelerate development, while using Skills, MCP Servers. My years of native iOS experience help me keep away the "Slop-Layer" and keep AI-generated code maintainable.
+                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.agenticTitle">Agentic Coding</h3>
+                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.agenticBody">I use AI coding tools like Claude Code, Cursor and Codex, together with Skills and MCP servers, to develop faster. My years of native iOS experience help me keep the "slop layer" out and keep AI-generated code maintainable.
                     </p>
                     <div class="flex flex-wrap gap-2"><span class="tag-style">Cursor</span><span class="tag-style">Codex</span><span class="tag-style">Skills</span></div>
                 </div>
@@ -210,12 +228,12 @@
     <!-- Work -->
     <section id="work" class="py-28 border-t border-white/10 bg-surface-elevated/50">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Work</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-16 reveal"><span class="text-gradient">Where I've worked.</span></h2>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="work.label">Work</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-16 reveal" data-i18n-html="work.heading"><span class="text-gradient">Where I've worked.</span></h2>
 
             <div class="space-y-4 max-w-3xl">
                 <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">10/2022 – Present</span>
+                    <span class="text-sm text-white/50 shrink-0">10/2022 - <span data-i18n="work.present">Present</span></span>
                     <div>
                         <p class="font-semibold text-white">Lead Developer Mobile (iOS) · Aviv</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -223,13 +241,13 @@
                                 <span>SeLoger iOS app</span>
                                 <i class="ph ph-arrow-up-right text-xs ml-1"></i>
                             </a>
-                            <span class="tag-style">~3.5 yrs</span>
+                            <span class="tag-style" data-i18n="work.years35">~3.5 yrs</span>
                             <span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 155k+ Reviews</span>
                         </div>
                     </div>
                 </div>
                 <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">04/2016 – 10/2022</span>
+                    <span class="text-sm text-white/50 shrink-0">04/2016 - 10/2022</span>
                     <div>
                         <p class="font-semibold text-white">Software Engineer Mobile (iOS) · Immowelt/Immonet</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -237,31 +255,31 @@
                                 <span>Immowelt iOS app</span>
                                 <i class="ph ph-arrow-up-right text-xs ml-1"></i>
                             </a>
-                            <span class="tag-style">~6.5 yrs</span>
+                            <span class="tag-style" data-i18n="work.years65">~6.5 yrs</span>
                             <span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.6 · 150k+ Reviews</span>
                         </div>
                     </div>
                 </div>
                 <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">02/2015 – 03/2016</span>
+                    <span class="text-sm text-white/50 shrink-0">02/2015 - 03/2016</span>
                     <div>
                         <p class="font-semibold text-white">Mobile Application Developer (iOS) · Fashionfreax</p>
-                        <span class="tag-style mt-2 inline-block">~1 yr</span>
+                        <span class="tag-style mt-2 inline-block" data-i18n="work.year1">~1 yr</span>
                     </div>
                 </div>
                 <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">08/2013 – 10/2014</span>
+                    <span class="text-sm text-white/50 shrink-0">08/2013 - 10/2014</span>
                     <div>
                         <p class="font-semibold text-white">Software Developer (C++ / QT / iOS / Android) · IPT Wismar</p>
-                        <span class="tag-style mt-2 inline-block">~1 yr</span>
+                        <span class="tag-style mt-2 inline-block" data-i18n="work.year1">~1 yr</span>
                     </div>
                 </div>
             </div>
 
             <div id="education" class="mt-20 pt-16 border-t border-white/10 reveal">
-                <h3 class="text-xl font-display font-semibold text-white mb-4">Education</h3>
-                <p class="text-white font-medium">Master's & Bachelor's in Multimedia Engineering, Hochschule Wismar</p>
-                <p class="text-white/60 text-sm mt-2">Microprocessor technology, image processing, computer graphics, audio, system programming, networking, application development.</p>
+                <h3 class="text-xl font-display font-semibold text-white mb-4" data-i18n="work.educationTitle">Education</h3>
+                <p class="text-white font-medium" data-i18n="work.educationDegree">Master's & Bachelor's in Multimedia Engineering, Hochschule Wismar</p>
+                <p class="text-white/60 text-sm mt-2" data-i18n="work.educationDetails">Microprocessor technology, image processing, computer graphics, audio, system programming, networking, application development.</p>
             </div>
         </div>
     </section>
@@ -269,8 +287,8 @@
     <!-- Testimonials -->
     <section id="testimonials" class="py-28 border-t border-white/10">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">What others say</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-10 reveal">
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="testimonials.label">What others say</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-10 reveal" data-i18n-html="testimonials.heading">
                 What others <span class="text-gradient">say.</span>
             </h2>
 
@@ -290,7 +308,7 @@
                         </p>
                     </div>
                 </div>
-                <p class="text-xs text-white/40 mt-4">More feedback from colleagues will be added here over time.</p>
+                <p class="text-xs text-white/40 mt-4" data-i18n="testimonials.footnote">More feedback from colleagues will be added here over time.</p>
             </div>
         </div>
     </section>
@@ -298,17 +316,17 @@
     <!-- Projects -->
     <section id="projects" class="py-28 border-t border-white/10">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Projects</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
-            <p class="text-white/60 mb-16 reveal">HabitBe, Pianoo, and more.</p>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="projects.label">Projects</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="projects.heading">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
+            <p class="text-white/60 mb-16 reveal" data-i18n="projects.intro">HabitBe, Pianoo, Gio+, and more.</p>
 
             <div class="space-y-24">
                 <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
                     <div class="order-2 lg:order-1">
                         <h3 class="text-2xl font-display font-bold text-white mb-2">HabitBe</h3>
-                        <p class="text-brand-400 font-medium mb-4">The habit tracker for minimalists.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351 Reviews</span></div>
-                        <p class="text-white/70 mb-4">A simple weekly habit tracker. No fancy features, just tracking what matters. Built with TCA, Core Data, CloudKit, SwiftUI.</p>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.habitbeTagline">The habit tracker for minimalists.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351 Reviews</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.habitbeDesc">A simple weekly habit tracker without extra features. Built with TCA, Core Data, CloudKit and SwiftUI.</p>
                         <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-white font-medium">habitbe.app →</a>
                     </div>
                     <a href="https://habitbe.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
@@ -322,16 +340,28 @@
                     </a>
                     <div>
                         <h3 class="text-2xl font-display font-bold text-white mb-2">Pianoo</h3>
-                        <p class="text-brand-400 font-medium mb-4">Chords. Scales. Progressions.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style">Active</span></div>
-                        <p class="text-white/70 mb-4">A music theory app for chords, scales, and progressions. Simple and useful for writing songs or practicing.</p>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.pianooTagline">Chords. Scales. Progressions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.pianooDesc">A music theory app for chords, scales and progressions, made for writing songs and practicing.</p>
                         <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-white font-medium">pianoo.app →</a>
+                    </div>
+                </div>
+
+                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-2xl font-display font-bold text-white mb-2">Gio+</h3>
+                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.gioTagline">Measure your range of motion.</p>
+                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.comingSoon">Coming soon</span></div>
+                        <p class="text-white/70 mb-4" data-i18n="projects.gioDesc">Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and tracks your recovery over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.</p>
+                    </div>
+                    <div class="order-1 lg:order-2 rounded-2xl overflow-hidden">
+                        <img src="Images/GioPlusPreview.png" alt="Gio+ App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Gio%2B'">
                     </div>
                 </div>
             </div>
 
             <div class="mt-24 pt-16 border-t border-white/10 reveal">
-                <h3 class="text-lg font-display font-semibold text-white mb-6">More projects</h3>
+                <h3 class="text-lg font-display font-semibold text-white mb-6" data-i18n="projects.moreTitle">More projects</h3>
                 <div class="space-y-6">
                     <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
                         <div class="flex gap-4">
@@ -341,7 +371,7 @@
                             </div>
                             <div>
                                 <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-white hover:text-brand-400">Jelly</a>
-                                <p class="text-sm text-white/60 mt-1">Open-source library for animated view controller transitions in UIKit.</p>
+                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.jellyDesc">Open-source library for animated view controller transitions in UIKit.</p>
                                 <div class="flex flex-wrap gap-2 mt-2">
                                     <span class="tag-style">Swift</span>
                                     <span class="tag-style">UIKit</span>
@@ -349,7 +379,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="tag-style self-start">Open Source</span>
+                        <span class="tag-style self-start" data-i18n="projects.openSource">Open Source</span>
                     </div>
                     <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
                         <div class="flex gap-4">
@@ -359,13 +389,12 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-white">Soundrocket</p>
-                                <p class="text-sm text-white/60 mt-1">
-                                    My first App Store release (2015), a SoundCloud client I stopped after their public API was shut down. The project is now private but still an important part of my journey.
+                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.soundrocketDesc">My first App Store release (2015), a SoundCloud client I discontinued after SoundCloud shut down its public API. The project is private now.
                                 </p>
                                 <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Objective-C</span><span class="tag-style">UIKit</span></div>
                             </div>
                         </div>
-                        <span class="tag-style self-start opacity-70">Inactive</span>
+                        <span class="tag-style self-start opacity-70" data-i18n="projects.inactive">Inactive</span>
                     </div>
                 </div>
             </div>
@@ -375,9 +404,9 @@
     <!-- Blog -->
     <section id="blog" class="py-28 border-t border-white/10 bg-surface-elevated/50">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal">Blog</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal">Articles on <span class="text-gradient">iOS development.</span></h2>
-            <p class="text-white/60 mb-12 reveal">I haven't written new posts recently—focusing on building apps instead.</p>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="blog.label">Blog</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="blog.heading">Articles on <span class="text-gradient">iOS development.</span></h2>
+            <p class="text-white/60 mb-12 reveal" data-i18n="blog.intro">I haven't written new posts recently because I've been building apps instead.</p>
 
             <div class="grid md:grid-cols-3 gap-6 mb-12">
                 <a href="https://medium.com/@sebastianbo/learn-and-master-%EF%B8%8F-the-basics-of-structured-concurrent-programming-in-swift-in-15-minutes-5fc700b0a77c" target="_blank"
@@ -400,7 +429,7 @@
                 </a>
             </div>
             <div class="reveal space-y-2">
-                <p class="text-sm text-white/50 mb-4">More:</p>
+                <p class="text-sm text-white/50 mb-4" data-i18n="blog.more">More:</p>
                 <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-iglistkit-in-10-minutes-3b9ce8a2632b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">IGListKit in 10 Minutes (2018)</a>
                 <a href="https://medium.com/ios-os-x-development/learn-and-master-%EF%B8%8F-the-basics-of-rxswift-in-10-minutes-818ea6e0a05b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">RxSwift in 10 Minutes (2017)</a>
                 <a href="https://medium.com/ios-os-x-development/ios-code-signing-provisioning-in-a-nutshell-d5b247760bef" target="_blank" class="block py-2 text-white/70 hover:text-white">iOS Code Signing (2016)</a>
@@ -411,11 +440,11 @@
     <!-- CTA -->
     <section class="py-32 border-t border-white/10">
         <div class="max-w-3xl mx-auto px-6 text-center reveal">
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Get <span class="text-gradient">in touch</span></h2>
-            <p class="text-white/60 mb-10">If you want to talk about iOS development, my projects, or anything else, feel free to reach out.</p>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4" data-i18n-html="cta.heading">Get <span class="text-gradient">in touch</span></h2>
+            <p class="text-white/60 mb-10" data-i18n="cta.body">If you want to talk about iOS development or my projects, send me a message.</p>
             <a href="mailto:self.dealloc@icloud.com"
                 class="inline-flex items-center gap-2 px-8 py-4 bg-white text-surface rounded-full font-semibold hover:bg-white/90 transition-colors">
-                <i class="ph ph-envelope-simple"></i> Contact me
+                <i class="ph ph-envelope-simple"></i> <span data-i18n="cta.button">Contact me</span>
             </a>
         </div>
     </section>
@@ -425,14 +454,14 @@
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
                 <a href="#" class="font-display font-semibold text-white">Sebastian Boldt</a>
-                <p class="text-sm text-white/50 mt-1">Mobile Application Engineer since 2012</p>
+                <p class="text-sm text-white/50 mt-1" data-i18n="footer.tagline">Mobile Application Engineer since 2012</p>
             </div>
             <nav class="flex gap-8 text-sm text-white/60">
-                <a href="#skills" class="hover:text-white">Expertise</a>
-                <a href="#work" class="hover:text-white">Work</a>
-                <a href="#testimonials" class="hover:text-white">Testimonials</a>
-                <a href="#projects" class="hover:text-white">Projects</a>
-                <a href="#blog" class="hover:text-white">Blog</a>
+                <a href="#skills" class="hover:text-white" data-i18n="nav.expertise">Expertise</a>
+                <a href="#work" class="hover:text-white" data-i18n="nav.work">Work</a>
+                <a href="#testimonials" class="hover:text-white" data-i18n="nav.testimonials">Testimonials</a>
+                <a href="#projects" class="hover:text-white" data-i18n="nav.projects">Projects</a>
+                <a href="#blog" class="hover:text-white" data-i18n="nav.blog">Blog</a>
             </nav>
             <div class="flex gap-6 text-white/50">
                 <a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white" aria-label="GitHub"><i class="ph-fill ph-github-logo text-xl"></i></a>
@@ -442,10 +471,11 @@
             </div>
         </div>
         <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/40">
-            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70">Privacy</a>
+            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70" data-i18n="footer.privacy">Privacy</a>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <!-- Scripts -->
     <script>
         // Mobile Menu Toggle
