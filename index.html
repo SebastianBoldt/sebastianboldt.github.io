@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sebastian Boldt - Mobile Application Engineer</title>
+    <meta name="theme-color" content="#0B0C0E">
     <script>
         (function () {
             var SUPPORTED = ['de', 'en'];
@@ -24,229 +25,380 @@
             document.documentElement.lang = 'en';
         })();
     </script>
+    <!-- Theme: dark by default, light only if chosen before. Runs first to avoid a flash. -->
+    <script>
+        try {
+            if (localStorage.getItem('sb-theme') === 'light') document.documentElement.classList.remove('dark');
+        } catch (e) {}
+    </script>
 
-    <!-- Google Fonts: Syne (Display) & DM Sans (Body) -->
+    <!-- Google Fonts: IBM Plex Sans (text) & IBM Plex Mono (labels, values) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Syne:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
 
-    <!-- Tailwind: modern minimal theme -->
+    <!-- Tailwind CSS. Colours point at the CSS variables below, so light and dark share one markup. -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        const token = name => `rgb(var(--${name}) / <alpha-value>)`;
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-                        display: ['Syne', 'system-ui', 'sans-serif'],
+                        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            400: '#7dd3fc',
-                            500: '#38bdf8',
-                            600: '#0ea5e9',
-                        },
-                        surface: {
-                            DEFAULT: '#0a0a0a',
-                            elevated: '#141414',
-                            muted: '#1c1c1c',
-                        },
-                        neutral: {
-                            400: '#a3a3a3',
-                            500: '#737373',
-                            600: '#525252',
-                            700: '#404040',
-                            800: '#262626',
-                            900: '#171717',
-                        },
-                        success: { 400: '#34d399', 500: '#10b981', }
+                        ink: token('ink'),
+                        panel: token('panel'),
+                        strong: token('strong'),
+                        text: token('text'),
+                        muted: token('muted'),
+                        dim: token('dim'),
+                        brand: token('brand'),   // sky blue, the site's own colour
+                        star: token('star'),
+                        line: 'var(--line)',
                     },
-                    aspectRatio: { '4/3': '4 / 3' },
-                }
-            }
-        }
+                },
+            },
+        };
     </script>
 
     <style>
-        .glass { background: rgba(10,10,10,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #a5f3fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .tag-style { display: inline-flex; align-items: center; font-size: 0.7rem; font-weight: 500; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.08); margin: 0.1rem; }
-        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .lang-btn-active { background: rgba(56, 189, 248, 0.1); color: #7dd3fc; }
+        /* Dark is the default. Values are RGB triplets so Tailwind can add opacity. */
+        :root {
+            --ink: 255 255 255;
+            --panel: 246 247 249;
+            --strong: 11 12 14;
+            --text: 31 35 40;
+            --muted: 87 96 106;
+            --dim: 110 119 129;
+            --brand: 2 132 199;      /* sky, darkened for contrast on white */
+            --star: 202 138 4;
+            --line: rgba(15, 23, 42, 0.12);
+            --line-strong: rgba(15, 23, 42, 0.24);
+            --grid-major: rgba(15, 23, 42, 0.06);
+            --grid-minor: rgba(15, 23, 42, 0.03);
+        }
+        html.dark {
+            --ink: 11 12 14;
+            --panel: 17 19 23;
+            --strong: 255 255 255;
+            --text: 232 234 237;
+            --muted: 139 144 153;
+            --dim: 108 114 124;
+            --brand: 56 189 248;     /* #38bdf8 */
+            --star: 251 191 36;
+            --line: rgba(255, 255, 255, 0.09);
+            --line-strong: rgba(255, 255, 255, 0.18);
+            --grid-major: rgba(255, 255, 255, 0.05);
+            --grid-minor: rgba(255, 255, 255, 0.022);
+        }
+
+        body {
+            font-feature-settings: "ss01", "tnum";
+        }
+
+        /* Headline accents come from the translations as .text-gradient; here they are plain brand colour */
+        .text-gradient {
+            color: rgb(var(--brand));
+        }
+
+        /* Mono label: section names, table heads, captions */
+        .lbl {
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgb(var(--dim));
+        }
+
+        /* Graph paper behind the hero: 8 px minor, 40 px major lines */
+        .graph-paper {
+            background-image:
+                linear-gradient(var(--grid-major) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+                linear-gradient(var(--grid-minor) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+            background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+        }
+
+        /* Nav gets a surface once the page scrolls */
+        .nav-solid {
+            background: rgb(var(--ink) / 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            border-radius: 6px;
+            background: rgb(var(--strong));
+            color: rgb(var(--ink));
+            font-weight: 500;
+            transition: opacity 0.15s ease;
+        }
+        .btn:hover {
+            opacity: 0.88;
+        }
+        .btn:focus-visible,
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid rgb(var(--brand));
+            outline-offset: 3px;
+        }
+
+        /* Language and theme switches */
+        .switch {
+            display: inline-flex;
+            border: 1px solid var(--line-strong);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .switch button {
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            padding: 0.4rem 0.55rem;
+            color: rgb(var(--muted));
+            line-height: 1;
+        }
+        .switch button.lang-btn-active {
+            background: rgb(var(--strong));
+            color: rgb(var(--ink));
+        }
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid var(--line-strong);
+            border-radius: 6px;
+            color: rgb(var(--muted));
+        }
+        .icon-btn:hover {
+            color: rgb(var(--strong));
+        }
+        html.dark .icon-moon,
+        html:not(.dark) .icon-sun {
+            display: none;
+        }
+
+        /* Small tags: technologies, ratings, durations */
+        .tag-style {
+            display: inline-flex;
+            align-items: center;
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 0.6875rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--line-strong);
+            color: rgb(var(--muted));
+        }
+        a.tag-style {
+            color: rgb(var(--brand));
+            border-color: rgb(var(--brand) / 0.4);
+        }
+        a.tag-style:hover {
+            background: rgb(var(--brand) / 0.08);
+        }
+
+        .shot-frame {
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+        }
+        .shot-frame img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        a.shot-frame:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Sections fade in once */
+        .reveal {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
     </style>
 </head>
 
-<body
-    class="bg-surface text-white/90 font-sans text-base antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden">
+<body class="bg-ink text-text font-sans antialiased selection:bg-brand selection:text-white overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
-        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="#" class="text-lg font-display font-semibold text-white tracking-tight">sebastianboldt.io</a>
-            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/60">
-                <a href="#projects" class="hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
-                <a href="#skills" class="hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a>
-                <a href="#work" class="hover:text-white transition-colors" data-i18n="nav.work">Work</a>
-                <a href="#testimonials" class="hover:text-white transition-colors" data-i18n="nav.testimonials">Testimonials</a>
-                <a href="#blog" class="hover:text-white transition-colors" data-i18n="nav.blog">Blog</a>
-                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
-                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
-                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+    <nav class="fixed w-full z-50 top-0 transition-colors duration-200" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center gap-4">
+            <a href="#" class="font-mono text-sm font-medium text-strong tracking-tight">sebastianboldt<span class="text-brand">.io</span></a>
+            <div class="flex items-center gap-3 lg:gap-6">
+                <div class="hidden lg:flex items-center gap-7 text-sm text-muted">
+                    <a href="#projects" class="hover:text-strong transition-colors" data-i18n="nav.projects">Projects</a>
+                    <a href="#skills" class="hover:text-strong transition-colors" data-i18n="nav.expertise">Expertise</a>
+                    <a href="#work" class="hover:text-strong transition-colors" data-i18n="nav.work">Work</a>
+                    <a href="#testimonials" class="hover:text-strong transition-colors" data-i18n="nav.testimonials">Testimonials</a>
+                    <a href="#blog" class="hover:text-strong transition-colors" data-i18n="nav.blog">Blog</a>
                 </div>
-                <a href="mailto:self.dealloc@icloud.com" target="_blank"
-                    class="bg-white text-surface px-4 py-2 rounded-full font-semibold hover:bg-white/90 transition-colors" data-i18n="nav.contact">
-                    Contact
-                </a>
-            </div>
-            <div class="md:hidden flex items-center gap-4">
-                <div class="lang-switch flex items-center rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-xs font-medium" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
-                    <button type="button" data-lang="de" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">DE</button>
-                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-white/50 hover:text-white/80 transition-colors" aria-pressed="false">EN</button>
+                <div class="switch" role="group" data-i18n-attr="aria-label:nav.languageLabel" aria-label="Language">
+                    <button type="button" data-lang="en" class="lang-btn" aria-pressed="false">EN</button>
+                    <button type="button" data-lang="de" class="lang-btn" aria-pressed="false">DE</button>
                 </div>
-                <button class="text-xl text-white" onclick="toggleMenu()" data-i18n-attr="aria-label:nav.menuLabel" aria-label="Menu"><i class="ph ph-list"></i></button>
+                <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch between light and dark mode">
+                    <i class="ph ph-moon icon-moon"></i><i class="ph ph-sun icon-sun"></i>
+                </button>
+                <a href="mailto:self.dealloc@icloud.com" class="btn px-4 py-2 text-sm hidden sm:inline-flex" data-i18n="nav.contact">Contact</a>
+                <button class="lg:hidden text-2xl text-strong" onclick="toggleMenu()" data-i18n-attr="aria-label:nav.menuLabel" aria-label="Menu"><i class="ph ph-list"></i></button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-surface border-b border-white/10 p-6 flex flex-col gap-4">
-            <a href="#projects" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
-            <a href="#skills" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.expertise">Expertise</a>
-            <a href="#work" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.work">Work</a>
-            <a href="#testimonials" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.testimonials">Testimonials</a>
-            <a href="#blog" class="block py-2 text-white/80 hover:text-white" onclick="toggleMenu()" data-i18n="nav.blog">Blog</a>
-            <a href="mailto:self.dealloc@icloud.com" class="mt-2 py-3 rounded-xl bg-white text-surface font-semibold text-center" data-i18n="nav.contact">Contact</a>
+        <div id="mobile-menu" class="hidden lg:hidden absolute w-full bg-panel border-b border-line p-6 flex-col gap-1">
+            <a href="#projects" class="block py-2 text-text" onclick="toggleMenu()" data-i18n="nav.projects">Projects</a>
+            <a href="#skills" class="block py-2 text-text" onclick="toggleMenu()" data-i18n="nav.expertise">Expertise</a>
+            <a href="#work" class="block py-2 text-text" onclick="toggleMenu()" data-i18n="nav.work">Work</a>
+            <a href="#testimonials" class="block py-2 text-text" onclick="toggleMenu()" data-i18n="nav.testimonials">Testimonials</a>
+            <a href="#blog" class="block py-2 text-text" onclick="toggleMenu()" data-i18n="nav.blog">Blog</a>
+            <a href="mailto:self.dealloc@icloud.com" class="btn w-full py-3 mt-3" data-i18n="nav.contact">Contact</a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <header class="relative min-h-[90vh] flex items-center pt-20 pb-24 overflow-hidden bg-surface">
-        <div class="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            <div class="text-center lg:text-left reveal">
-                <p class="text-xs font-medium uppercase tracking-[0.2em] text-brand-500/90 mb-6" data-i18n="hero.eyebrow">iOS Engineer since 2012</p>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.08] mb-6" data-i18n-html="hero.title">
-                    Mobile Application Engineer<br /><span class="text-gradient">from Hamburg.</span>
-                </h1>
-                <p class="text-lg text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10" data-i18n="hero.bio">I have been building native iOS apps for more than 10 years. I have shipped several apps and contributed to multiple open source projects. I work on every step of development, from the idea and prototyping through UX, UI and accessibility to implementation, continuous integration and deployment.
+    <header class="relative pt-28 lg:pt-36 overflow-hidden border-b border-line">
+        <div class="absolute inset-0 graph-paper pointer-events-none" aria-hidden="true"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative grid lg:grid-cols-12 gap-12 items-center pb-16 lg:pb-20">
+            <div class="lg:col-span-7 reveal">
+                <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted mb-6 flex items-center gap-3">
+                    <span class="inline-block w-2 h-2 rounded-full bg-brand shrink-0"></span>
+                    <span data-i18n="hero.eyebrow">iOS Engineer since 2012</span>
                 </p>
-                <ul class="flex justify-center lg:justify-start gap-6 mb-10 text-white/50 text-xl">
-                    <li><a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white transition-colors" aria-label="GitHub"><i class="ph-fill ph-github-logo"></i></a></li>
-                    <li><a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-white transition-colors" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a></li>
-                    <li><a href="https://medium.com/@sebastianbo" target="_blank" class="hover:text-white transition-colors" aria-label="Medium"><i class="ph-fill ph-medium-logo"></i></a></li>
-                    <li><a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-white transition-colors" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a></li>
-                    <li><a href="https://open.spotify.com/artist/10m1VL1DyqBfIJw54rOefh" target="_blank" class="hover:text-white transition-colors" aria-label="Spotify"><i class="ph-fill ph-spotify-logo"></i></a></li>
-                </ul>
-                <p class="text-sm text-white/40" data-i18n="hero.tagline">Design · Code · Tooling</p>
-            </div>
-            <div class="flex justify-center reveal" style="transition-delay: 0.15s">
-                <div class="relative rounded-full p-[3px] bg-gradient-to-br from-brand-500/60 via-brand-400/30 to-transparent shadow-[0_0_50px_rgba(56,189,248,0.2),0_0_100px_rgba(56,189,248,0.08)]">
-                    <img src="Images/memoji.JPG" alt="Sebastian Boldt"
-                        class="w-64 h-64 lg:w-80 lg:h-80 rounded-full object-cover ring-2 ring-surface"
-                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/1c1c1c/666?text=SB'">
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold tracking-tight text-strong leading-[1.08] mb-6" data-i18n-html="hero.title">Mobile Application Engineer<br /><span class="text-gradient">from Hamburg.</span></h1>
+                <p class="text-lg text-muted mb-8 max-w-xl leading-relaxed" data-i18n="hero.bio">I have been building native iOS apps for more than 10 years. I have shipped several apps and contributed to multiple open source projects. I work on every step of development, from the idea and prototyping through UX, UI and accessibility to implementation, continuous integration and deployment.</p>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+                    <a href="mailto:self.dealloc@icloud.com" class="btn px-6 py-3.5">
+                        <i class="ph ph-envelope-simple text-lg"></i>
+                        <span data-i18n="cta.button">Contact me</span>
+                    </a>
+                    <ul class="flex gap-5 text-muted text-xl">
+                        <li><a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-strong transition-colors" aria-label="GitHub"><i class="ph-fill ph-github-logo"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-strong transition-colors" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a></li>
+                        <li><a href="https://medium.com/@sebastianbo" target="_blank" class="hover:text-strong transition-colors" aria-label="Medium"><i class="ph-fill ph-medium-logo"></i></a></li>
+                        <li><a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-strong transition-colors" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a></li>
+                        <li><a href="https://open.spotify.com/artist/10m1VL1DyqBfIJw54rOefh" target="_blank" class="hover:text-strong transition-colors" aria-label="Spotify"><i class="ph-fill ph-spotify-logo"></i></a></li>
+                    </ul>
                 </div>
+                <p class="mt-6 font-mono text-xs text-dim" data-i18n="hero.tagline">Design · Code · Tooling</p>
+            </div>
+            <div class="lg:col-span-5 reveal">
+                <figure class="max-w-[320px] mx-auto">
+                    <div class="border border-line rounded-lg p-2 bg-ink">
+                        <img src="Images/memoji.JPG" alt="Sebastian Boldt" class="w-full aspect-square object-cover rounded-md">
+                    </div>
+                    <figcaption class="lbl mt-3 flex justify-between"><span>Sebastian Boldt</span><span>Hamburg</span></figcaption>
+                </figure>
             </div>
         </div>
+
     </header>
 
-    <!-- Core Skills -->
-    <div class="border-t border-white/10 bg-surface-elevated/50 py-16">
+    <!-- Core skills -->
+    <div class="border-b border-line">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-10" data-i18n="coreSkills.label">Core Skills</p>
-            <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white/70 font-medium">
-                <span class="flex items-center gap-2"><i class="ph ph-apple-logo text-brand-400 text-xl"></i> <span data-i18n="coreSkills.swift">Swift & SwiftUI / Objective-C & UIKit</span></span>
-                <span class="flex items-center gap-2"><i class="ph ph-globe-hemisphere-west text-brand-400 text-xl"></i> <span data-i18n="coreSkills.apple">Deep knowledge of the Apple ecosystem</span></span>
-                <span class="flex items-center gap-2"><i class="ph ph-scroll text-brand-400 text-xl"></i> <span data-i18n="coreSkills.pointFree">Point-Free Ecosystem (TCA, SQLiteData, Sharing etc.)</span></span>
-                <span class="flex items-center gap-2"><i class="ph ph-cube text-brand-400 text-xl"></i> <span data-i18n="coreSkills.architecture">Software Architecture</span></span>
-                <span class="flex items-center gap-2"><i class="ph ph-palette text-brand-400 text-xl"></i> <span data-i18n="coreSkills.uxui">UX & UI</span></span>
-                <span class="flex items-center gap-2"><i class="ph ph-robot text-brand-400 text-xl"></i> <span data-i18n="coreSkills.agentic">Agentic Coding</span></span>
-            </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border-x border-line">
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-apple-logo text-brand text-lg"></i> <span data-i18n="coreSkills.swift">Swift & SwiftUI / Objective-C & UIKit</span></span>
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-globe-hemisphere-west text-brand text-lg"></i> <span data-i18n="coreSkills.apple">Deep knowledge of the Apple ecosystem</span></span>
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-scroll text-brand text-lg"></i> <span data-i18n="coreSkills.pointFree">Point-Free Ecosystem (TCA, SQLiteData, Sharing etc.)</span></span>
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-cube text-brand text-lg"></i> <span data-i18n="coreSkills.architecture">Software Architecture</span></span>
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-palette text-brand text-lg"></i> <span data-i18n="coreSkills.uxui">UX & UI</span></span>
+            <span class="bg-ink px-5 py-4 flex items-center gap-3 text-sm text-text"><i class="ph ph-robot text-brand text-lg"></i> <span data-i18n="coreSkills.agentic">Agentic Coding</span></span>
+        </div>
         </div>
     </div>
 
-    <!-- Projects -->
-    <section id="projects" class="py-28 border-t border-white/10">
+    <!-- 01 Projects -->
+    <section id="projects" class="py-20 lg:py-28 border-b border-line scroll-mt-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="projects.label">Projects</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="projects.heading">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
-            <p class="text-white/60 mb-16 reveal" data-i18n="projects.intro">HabitBe, Pianoo, Gio+, and more.</p>
+            <div class="flex items-center gap-4 mb-12 reveal">
+                <span class="font-mono text-xs text-brand">01</span>
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted" data-i18n="projects.label">Projects</span>
+                <span class="h-px flex-1 bg-line"></span>
+            </div>
+            <div class="max-w-2xl mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-strong mb-5" data-i18n-html="projects.heading">Apps I've built <span class="text-gradient">in my spare time.</span></h2>
+                <p class="text-muted text-lg leading-relaxed" data-i18n="projects.intro">HabitBe, Pianoo, Gio+, and more.</p>
+            </div>
 
-            <div class="space-y-24">
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">HabitBe</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.habitbeTagline">The habit tracker for minimalists.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span><span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 351 Reviews</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.habitbeDesc">A simple weekly habit tracker without extra features. Built with TCA, Core Data, CloudKit and SwiftUI.</p>
-                        <a href="https://habitbe.app" target="_blank" class="text-brand-400 hover:text-white font-medium">habitbe.app →</a>
-                    </div>
-                    <a href="https://habitbe.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
-                        <img src="Images/HabitBePreview.png" alt="HabitBe App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=HabitBe'">
-                    </a>
+            <div class="grid md:grid-cols-3 auto-rows-fr gap-px bg-line border border-line rounded-lg overflow-hidden">
+                <div class="p-6 flex flex-col bg-ink reveal">
+                    <div class="lbl mb-4 flex justify-between"><span>A · HabitBe</span><span class="text-star">★ 4.7 · 351</span></div>
+                    <h3 class="text-lg font-semibold text-strong mb-1">HabitBe</h3>
+                    <p class="text-brand text-sm font-medium mb-3" data-i18n="projects.habitbeTagline">The habit tracker for minimalists.</p>
+                    <p class="text-muted text-sm leading-relaxed mb-5 flex-grow" data-i18n="projects.habitbeDesc">A simple weekly habit tracker without extra features. Built with TCA, Core Data, CloudKit and SwiftUI.</p>
+                    <a href="https://habitbe.app" target="_blank" class="shot-frame mb-4"><img src="Images/HabitBePreview.png" alt="HabitBe App"></a>
+                    <div class="flex items-center justify-between"><span class="tag-style" data-i18n="projects.active">Active</span><a href="https://habitbe.app" target="_blank" class="font-mono text-xs text-brand hover:underline">habitbe.app →</a></div>
                 </div>
-
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <a href="https://pianoo.app" target="_blank" class="block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
-                        <img src="Images/PianooPreview.png" alt="Pianoo App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Pianoo'">
-                    </a>
-                    <div>
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">Pianoo</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.pianooTagline">Chords. Scales. Progressions.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.active">Active</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.pianooDesc">A music theory app for chords, scales and progressions, made for writing songs and practicing.</p>
-                        <a href="https://pianoo.app" target="_blank" class="text-brand-400 hover:text-white font-medium">pianoo.app →</a>
-                    </div>
+                <div class="p-6 flex flex-col bg-ink reveal">
+                    <div class="lbl mb-4">B · Pianoo</div>
+                    <h3 class="text-lg font-semibold text-strong mb-1">Pianoo</h3>
+                    <p class="text-brand text-sm font-medium mb-3" data-i18n="projects.pianooTagline">Chords. Scales. Progressions.</p>
+                    <p class="text-muted text-sm leading-relaxed mb-5 flex-grow" data-i18n="projects.pianooDesc">A music theory app for chords, scales and progressions, made for writing songs and practicing.</p>
+                    <a href="https://pianoo.app" target="_blank" class="shot-frame mb-4"><img src="Images/PianooPreview.png" alt="Pianoo App"></a>
+                    <div class="flex items-center justify-between"><span class="tag-style" data-i18n="projects.active">Active</span><a href="https://pianoo.app" target="_blank" class="font-mono text-xs text-brand hover:underline">pianoo.app →</a></div>
                 </div>
-
-                <div class="reveal grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-2xl font-display font-bold text-white mb-2">Gio+</h3>
-                        <p class="text-brand-400 font-medium mb-4" data-i18n="projects.gioTagline">Measure your range of motion.</p>
-                        <div class="flex flex-wrap gap-2 mb-4"><span class="tag-style" data-i18n="projects.comingSoon">Coming soon</span></div>
-                        <p class="text-white/70 mb-4" data-i18n="projects.gioDesc">Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and shows how your range of motion changes over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.</p>
-                        <a href="https://gioplus.app" target="_blank" class="text-brand-400 hover:text-white font-medium">gioplus.app →</a>
-                    </div>
-                    <a href="https://gioplus.app" target="_blank" class="order-1 lg:order-2 block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1">
-                        <img src="Images/GioPlusPreview.png" alt="Gio+ App" class="w-full aspect-4/3 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1c1c1c/666?text=Gio%2B'">
-                    </a>
+                <div class="p-6 flex flex-col bg-ink reveal">
+                    <div class="lbl mb-4">C · Gio+</div>
+                    <h3 class="text-lg font-semibold text-strong mb-1">Gio+</h3>
+                    <p class="text-brand text-sm font-medium mb-3" data-i18n="projects.gioTagline">Measure your range of motion.</p>
+                    <p class="text-muted text-sm leading-relaxed mb-5 flex-grow" data-i18n="projects.gioDesc">Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and shows how your range of motion changes over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.</p>
+                    <a href="https://gioplus.app" target="_blank" class="shot-frame mb-4"><img src="Images/GioPlusPreview.png" alt="Gio+ App"></a>
+                    <div class="flex items-center justify-between"><span class="tag-style" data-i18n="projects.comingSoon">Coming soon</span><a href="https://gioplus.app" target="_blank" class="font-mono text-xs text-brand hover:underline">gioplus.app →</a></div>
                 </div>
             </div>
 
-            <div class="mt-24 pt-16 border-t border-white/10 reveal">
-                <h3 class="text-lg font-display font-semibold text-white mb-6" data-i18n="projects.moreTitle">More projects</h3>
-                <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+            <div class="mt-16 reveal">
+                <h3 class="lbl mb-4" data-i18n="projects.moreTitle">More projects</h3>
+                <div class="border border-line rounded-lg divide-y divide-[color:var(--line)]">
+                    <div class="p-5 flex flex-col sm:flex-row sm:justify-between gap-3">
                         <div class="flex gap-4">
-                            <div class="shrink-0">
-                                <img src="Images/Jelly.png" alt="Jelly library" class="w-14 h-14 rounded-xl object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=J';">
-                            </div>
+                            <img src="Images/Jelly.png" alt="Jelly library" class="w-12 h-12 rounded-md object-cover shrink-0">
                             <div>
-                                <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-white hover:text-brand-400">Jelly</a>
-                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.jellyDesc">Open-source library for animated view controller transitions in UIKit.</p>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="tag-style">Swift</span>
-                                    <span class="tag-style">UIKit</span>
-                                    <span class="tag-style"><span class="text-amber-400 mr-1">★</span>2.5k+ stars</span>
-                                </div>
+                                <a href="https://github.com/SebastianBoldt/Jelly" target="_blank" class="font-semibold text-strong hover:text-brand">Jelly</a>
+                                <p class="text-sm text-muted mt-1" data-i18n="projects.jellyDesc">Open-source library for animated view controller transitions in UIKit.</p>
+                                <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Swift</span><span class="tag-style">UIKit</span><span class="tag-style"><span class="text-star mr-1">★</span>2.5k+ stars</span></div>
                             </div>
                         </div>
                         <span class="tag-style self-start" data-i18n="projects.openSource">Open Source</span>
                     </div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between gap-2 py-4 border-b border-white/10">
+                    <div class="p-5 flex flex-col sm:flex-row sm:justify-between gap-3">
                         <div class="flex gap-4">
-                            <div class="shrink-0">
-                                <img src="Images/Soundrocket.png" alt="Soundrocket app icon" class="w-14 h-14 rounded-xl object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=SR';">
-                            </div>
+                            <img src="Images/Soundrocket.png" alt="Soundrocket app icon" class="w-12 h-12 rounded-md object-cover shrink-0">
                             <div>
-                                <p class="font-semibold text-white">Soundrocket</p>
-                                <p class="text-sm text-white/60 mt-1" data-i18n="projects.soundrocketDesc">My first App Store release (2015), a SoundCloud client I discontinued after SoundCloud shut down its public API. The project is private now.
-                                </p>
+                                <p class="font-semibold text-strong">Soundrocket</p>
+                                <p class="text-sm text-muted mt-1" data-i18n="projects.soundrocketDesc">My first App Store release (2015), a SoundCloud client I discontinued after SoundCloud shut down its public API. The project is private now.</p>
                                 <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style">Objective-C</span><span class="tag-style">UIKit</span></div>
                             </div>
                         </div>
@@ -257,263 +409,260 @@
         </div>
     </section>
 
-    <!-- Expertise -->
-    <section id="skills" class="py-28 border-t border-white/10 relative">
+    <!-- 02 Expertise -->
+    <section id="skills" class="py-20 lg:py-28 border-b border-line bg-panel/60 scroll-mt-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="expertise.label">What I Do</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="expertise.heading">Clean architecture, modular design, <span class="text-gradient">maintainability.</span></h2>
-            <p class="text-white/60 max-w-2xl mb-16 reveal" data-i18n="expertise.intro">I build iOS apps with a focus on these principles.</p>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-strategy"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.architectureTitle">Architecture & Modularity</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.architectureBody">I have worked with MVVM, VIPER and more traditional patterns. Today I mostly use The Composable Architecture (TCA) and the Point‑Free ecosystem, a Redux-style approach. With Swift Package Manager I draw clear boundaries between modules, so features stay reusable and easy to slice out. Whatever the pattern, I inject dependencies explicitly so the code stays testable and easy to change.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag-style">TCA</span>
-                        <span class="tag-style">SPM</span>
-                        <span class="tag-style">MVVM</span>
-                        <span class="tag-style">MVC</span>
-                        <span class="tag-style">VIPER</span>
-                        <span class="tag-style">Clean Architecture</span>
-                    </div>
+            <div class="flex items-center gap-4 mb-12 reveal">
+                <span class="font-mono text-xs text-brand">02</span>
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted" data-i18n="expertise.label">What I Do</span>
+                <span class="h-px flex-1 bg-line"></span>
+            </div>
+            <div class="max-w-2xl mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-strong mb-5" data-i18n-html="expertise.heading">Clean architecture, modular design, <span class="text-gradient">maintainability.</span></h2>
+                <p class="text-muted text-lg leading-relaxed" data-i18n="expertise.intro">I build iOS apps with a focus on these principles.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-px bg-line border border-line rounded-lg overflow-hidden">
+                <div class="p-6 md:p-8 bg-ink reveal">
+                    <div class="flex items-center gap-3 mb-4"><i class="ph ph-strategy text-xl text-brand"></i><span class="lbl">A</span></div>
+                    <h3 class="text-lg font-semibold text-strong mb-3" data-i18n="expertise.architectureTitle">Architecture & Modularity</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-5" data-i18n="expertise.architectureBody">I have worked with MVVM, VIPER and more traditional patterns. Today I mostly use The Composable Architecture (TCA) and the Point‑Free ecosystem, a Redux-style approach. With Swift Package Manager I draw clear boundaries between modules, so features stay reusable and easy to slice out. Whatever the pattern, I inject dependencies explicitly so the code stays testable and easy to change.</p>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">TCA</span><span class="tag-style">SPM</span><span class="tag-style">MVVM</span><span class="tag-style">MVC</span><span class="tag-style">VIPER</span><span class="tag-style">Clean Architecture</span></div>
                 </div>
-                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-device-mobile"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.frameworksTitle">Framework Knowledge</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.frameworksBody">I work with SwiftUI every day and have a lot of UIKit experience from large projects. I have also worked with AudioKit, StoreKit, CloudKit, WidgetKit, MapKit, Core Data and the iOS Accessibility APIs. When a legacy codebase needs maintaining or extending, I work in Objective-C too.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag-style">Swift</span>
-                        <span class="tag-style">SwiftUI</span>
-                        <span class="tag-style">UIKit</span>
-                        <span class="tag-style">Objective-C</span>
-                    </div>
+                <div class="p-6 md:p-8 bg-ink reveal">
+                    <div class="flex items-center gap-3 mb-4"><i class="ph ph-device-mobile text-xl text-brand"></i><span class="lbl">B</span></div>
+                    <h3 class="text-lg font-semibold text-strong mb-3" data-i18n="expertise.frameworksTitle">Framework Knowledge</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-5" data-i18n="expertise.frameworksBody">I work with SwiftUI every day and have a lot of UIKit experience from large projects. I have also worked with AudioKit, StoreKit, CloudKit, WidgetKit, MapKit, Core Data and the iOS Accessibility APIs. When a legacy codebase needs maintaining or extending, I work in Objective-C too.</p>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">Swift</span><span class="tag-style">SwiftUI</span><span class="tag-style">UIKit</span><span class="tag-style">Objective-C</span></div>
                 </div>
-                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-users"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.teamTitle">Team Collaboration & Mentoring</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.teamBody">I have mentored developers and given talks on iOS topics. I have worked in large international teams with mono-repo and multi-repo setups, and in smaller local teams. I have automated builds and releases with Xcode Cloud, Bitrise and Jenkins.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag-style">CI/CD</span>
-                        <span class="tag-style">Xcode Cloud</span>
-                        <span class="tag-style">Bitrise</span>
-                        <span class="tag-style">Jira & Scrum</span>
-                    </div>
+                <div class="p-6 md:p-8 bg-ink reveal">
+                    <div class="flex items-center gap-3 mb-4"><i class="ph ph-users text-xl text-brand"></i><span class="lbl">C</span></div>
+                    <h3 class="text-lg font-semibold text-strong mb-3" data-i18n="expertise.teamTitle">Team Collaboration & Mentoring</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-5" data-i18n="expertise.teamBody">I have mentored developers and given talks on iOS topics. I have worked in large international teams with mono-repo and multi-repo setups, and in smaller local teams. I have automated builds and releases with Xcode Cloud, Bitrise and Jenkins.</p>
+                    <div class="flex flex-wrap gap-2"><span class="tag-style">CI/CD</span><span class="tag-style">Xcode Cloud</span><span class="tag-style">Bitrise</span><span class="tag-style">Jira & Scrum</span></div>
                 </div>
-                <div class="reveal rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-4"><i class="ph ph-robot"></i></div>
-                    <h3 class="text-lg font-display font-semibold text-white mb-3" data-i18n="expertise.agenticTitle">Agentic Coding</h3>
-                    <p class="text-white/65 text-sm leading-relaxed mb-4" data-i18n="expertise.agenticBody">I use AI coding tools like Claude Code, Cursor and Codex, together with Skills and MCP servers, to develop faster. My years of native iOS experience help me keep the "slop layer" out and keep AI-generated code maintainable.
-                    </p>
+                <div class="p-6 md:p-8 bg-ink reveal">
+                    <div class="flex items-center gap-3 mb-4"><i class="ph ph-robot text-xl text-brand"></i><span class="lbl">D</span></div>
+                    <h3 class="text-lg font-semibold text-strong mb-3" data-i18n="expertise.agenticTitle">Agentic Coding</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-5" data-i18n="expertise.agenticBody">I use AI coding tools like Claude Code, Cursor and Codex, together with Skills and MCP servers, to develop faster. My years of native iOS experience help me keep the "slop layer" out and keep AI-generated code maintainable.</p>
                     <div class="flex flex-wrap gap-2"><span class="tag-style">Cursor</span><span class="tag-style">Codex</span><span class="tag-style">Skills</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work -->
-    <section id="work" class="py-28 border-t border-white/10 bg-surface-elevated/50">
+    <!-- 03 Work -->
+    <section id="work" class="py-20 lg:py-28 border-b border-line scroll-mt-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="work.label">Work</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-16 reveal" data-i18n-html="work.heading"><span class="text-gradient">Where I've worked.</span></h2>
+            <div class="flex items-center gap-4 mb-12 reveal">
+                <span class="font-mono text-xs text-brand">03</span>
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted" data-i18n="work.label">Work</span>
+                <span class="h-px flex-1 bg-line"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-strong mb-12 reveal" data-i18n-html="work.heading"><span class="text-gradient">Where I've worked.</span></h2>
 
-            <div class="space-y-4 max-w-3xl">
-                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">10/2022 - <span data-i18n="work.present">Present</span></span>
+            <div class="border border-line rounded-lg overflow-hidden reveal">
+                <div class="grid grid-cols-[9rem_1fr] max-sm:grid-cols-1 gap-x-6 gap-y-1 px-5 py-5 border-b border-line">
+                    <span class="font-mono text-xs text-dim pt-1">10/2022 - <span data-i18n="work.present">Present</span></span>
                     <div>
-                        <p class="font-semibold text-white">Lead Developer Mobile (iOS) · Aviv</p>
+                        <p class="font-semibold text-strong">Lead Developer Mobile (iOS) · Aviv</p>
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <a href="https://apps.apple.com/fr/app/seloger-location-achat-immo/id326883014" target="_blank" class="tag-style bg-brand-500/10 text-brand-300 border-brand-500/40 hover:bg-brand-500/20 hover:text-brand-200 transition-colors">
-                                <span>SeLoger iOS app</span>
-                                <i class="ph ph-arrow-up-right text-xs ml-1"></i>
-                            </a>
+                            <a href="https://apps.apple.com/fr/app/seloger-location-achat-immo/id326883014" target="_blank" class="tag-style">SeLoger iOS app <i class="ph ph-arrow-up-right text-xs ml-1"></i></a>
                             <span class="tag-style" data-i18n="work.years35">~3.5 yrs</span>
-                            <span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.7 · 155k+ Reviews</span>
+                            <span class="tag-style"><span class="text-star mr-1">★</span>4.7 · 155k+ Reviews</span>
                         </div>
                     </div>
                 </div>
-                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">04/2016 - 10/2022</span>
+                <div class="grid grid-cols-[9rem_1fr] max-sm:grid-cols-1 gap-x-6 gap-y-1 px-5 py-5 border-b border-line">
+                    <span class="font-mono text-xs text-dim pt-1">04/2016 - 10/2022</span>
                     <div>
-                        <p class="font-semibold text-white">Software Engineer Mobile (iOS) · Immowelt/Immonet</p>
+                        <p class="font-semibold text-strong">Software Engineer Mobile (iOS) · Immowelt/Immonet</p>
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <a href="https://apps.apple.com/ci/app/immowelt-immobilien-suche/id354119842" target="_blank" class="tag-style bg-brand-500/10 text-brand-300 border-brand-500/40 hover:bg-brand-500/20 hover:text-brand-200 transition-colors">
-                                <span>Immowelt iOS app</span>
-                                <i class="ph ph-arrow-up-right text-xs ml-1"></i>
-                            </a>
+                            <a href="https://apps.apple.com/ci/app/immowelt-immobilien-suche/id354119842" target="_blank" class="tag-style">Immowelt iOS app <i class="ph ph-arrow-up-right text-xs ml-1"></i></a>
                             <span class="tag-style" data-i18n="work.years65">~6.5 yrs</span>
-                            <span class="tag-style"><span class="text-amber-400 mr-1">★</span>4.6 · 150k+ Reviews</span>
+                            <span class="tag-style"><span class="text-star mr-1">★</span>4.6 · 150k+ Reviews</span>
                         </div>
                     </div>
                 </div>
-                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">02/2015 - 03/2016</span>
+                <div class="grid grid-cols-[9rem_1fr] max-sm:grid-cols-1 gap-x-6 gap-y-1 px-5 py-5 border-b border-line">
+                    <span class="font-mono text-xs text-dim pt-1">02/2015 - 03/2016</span>
                     <div>
-                        <p class="font-semibold text-white">Mobile Application Developer (iOS) · Fashionfreax</p>
-                        <span class="tag-style mt-2 inline-block" data-i18n="work.year1">~1 yr</span>
+                        <p class="font-semibold text-strong">Mobile Application Developer (iOS) · Fashionfreax</p>
+                        <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style" data-i18n="work.year1">~1 yr</span></div>
                     </div>
                 </div>
-                <div class="reveal flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 py-6 border-b border-white/10">
-                    <span class="text-sm text-white/50 shrink-0">08/2013 - 10/2014</span>
+                <div class="grid grid-cols-[9rem_1fr] max-sm:grid-cols-1 gap-x-6 gap-y-1 px-5 py-5">
+                    <span class="font-mono text-xs text-dim pt-1">08/2013 - 10/2014</span>
                     <div>
-                        <p class="font-semibold text-white">Software Developer (C++ / QT / iOS / Android) · IPT Wismar</p>
-                        <span class="tag-style mt-2 inline-block" data-i18n="work.year1">~1 yr</span>
+                        <p class="font-semibold text-strong">Software Developer (C++ / QT / iOS / Android) · IPT Wismar</p>
+                        <div class="flex flex-wrap gap-2 mt-2"><span class="tag-style" data-i18n="work.year1">~1 yr</span></div>
                     </div>
                 </div>
             </div>
 
-            <div id="education" class="mt-20 pt-16 border-t border-white/10 reveal">
-                <h3 class="text-xl font-display font-semibold text-white mb-4" data-i18n="work.educationTitle">Education</h3>
-                <p class="text-white font-medium" data-i18n="work.educationDegree">Master's & Bachelor's in Multimedia Engineering, Hochschule Wismar</p>
-                <p class="text-white/60 text-sm mt-2" data-i18n="work.educationDetails">Microprocessor technology, image processing, computer graphics, audio, system programming, networking, application development.</p>
+            <div id="education" class="mt-6 border border-line rounded-lg p-5 grid md:grid-cols-[9rem_1fr] gap-3 md:gap-6 reveal">
+                <div class="lbl pt-1" data-i18n="work.educationTitle">Education</div>
+                <div>
+                    <p class="font-semibold text-strong" data-i18n="work.educationDegree">Master's & Bachelor's in Multimedia Engineering, Hochschule Wismar</p>
+                    <p class="text-muted text-sm mt-2" data-i18n="work.educationDetails">Microprocessor technology, image processing, computer graphics, audio, system programming, networking, application development.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-28 border-t border-white/10">
+    <!-- 04 Testimonials -->
+    <section id="testimonials" class="py-20 lg:py-28 border-b border-line bg-panel/60 scroll-mt-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="testimonials.label">What others say</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-10 reveal" data-i18n-html="testimonials.heading">
-                What others <span class="text-gradient">say.</span>
-            </h2>
-
-            <div class="reveal max-w-3xl">
-                <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 flex gap-4 sm:gap-6 items-start">
-                    <img src="Images/kevin.jpeg" alt="Kevin Hirsch" class="w-14 h-14 rounded-full object-cover mt-1"
-                         onerror="this.onerror=null;this.src='https://placehold.co/80x80/1c1c1c/666?text=K';">
+            <div class="flex items-center gap-4 mb-12 reveal">
+                <span class="font-mono text-xs text-brand">04</span>
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted" data-i18n="testimonials.label">What others say</span>
+                <span class="h-px flex-1 bg-line"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-strong mb-12 reveal" data-i18n-html="testimonials.heading">What others <span class="text-gradient">say.</span></h2>
+            <figure class="reveal max-w-3xl border border-line rounded-lg bg-ink p-6 sm:p-8">
+                <blockquote class="text-text leading-relaxed">“Sebastian is always there to help on every topic (being humble, open-minded and approachable), making sure that the whole iOS community is aligned, tackling transversal problems for developers or the products we build, aiming to simplify the work of all our iOS developers so they can deliver great results on the audacious objectives we have at Aviv, setting ourselves up for success! Thanks Sebastian.”</blockquote>
+                <figcaption class="mt-6 pt-5 border-t border-line flex items-center gap-4">
+                    <img src="Images/kevin.jpeg" alt="Kevin Hirsch" class="w-10 h-10 rounded-full object-cover">
                     <div>
-                        <p class="text-sm font-semibold text-white">Kevin Hirsch</p>
-                        <p class="text-xs text-white/50 mb-3">Principal Engineer · Aviv</p>
-                        <p class="text-sm text-white/80 leading-relaxed">
-                            “Sebastian is always there to help on every topic (being humble, open-minded and approachable),
-                            making sure that the whole iOS community is aligned, tackling transversal problems for developers
-                            or the products we build, aiming to simplify the work of all our iOS developers so they can
-                            deliver great results on the audacious objectives we have at Aviv, setting ourselves up for success!
-                            Thanks Sebastian.”
-                        </p>
+                        <p class="text-sm font-semibold text-strong">Kevin Hirsch</p>
+                        <p class="lbl">Principal Engineer · Aviv</p>
                     </div>
-                </div>
-                <p class="text-xs text-white/40 mt-4" data-i18n="testimonials.footnote">More feedback from colleagues will be added here over time.</p>
-            </div>
+                </figcaption>
+            </figure>
+            <p class="font-mono text-xs text-dim mt-4 reveal" data-i18n="testimonials.footnote">More feedback from colleagues will be added here over time.</p>
         </div>
     </section>
 
-    <!-- Blog -->
-    <section id="blog" class="py-28 border-t border-white/10 bg-surface-elevated/50">
+    <!-- 05 Blog -->
+    <section id="blog" class="py-20 lg:py-28 border-b border-line scroll-mt-16">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-3 reveal" data-i18n="blog.label">Blog</p>
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 reveal" data-i18n-html="blog.heading">Articles on <span class="text-gradient">iOS development.</span></h2>
-            <p class="text-white/60 mb-12 reveal" data-i18n="blog.intro">I haven't written new posts recently because I've been building apps instead.</p>
-
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <a href="https://medium.com/@sebastianbo/learn-and-master-%EF%B8%8F-the-basics-of-structured-concurrent-programming-in-swift-in-15-minutes-5fc700b0a77c" target="_blank"
-                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
-                    <img src="Images/asyncawaitbanner.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
-                    <h4 class="font-display font-semibold text-white mb-1">Structured Concurrency in Swift</h4>
-                    <p class="text-xs text-white/50">Feb 2022</p>
+            <div class="flex items-center gap-4 mb-12 reveal">
+                <span class="font-mono text-xs text-brand">05</span>
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted" data-i18n="blog.label">Blog</span>
+                <span class="h-px flex-1 bg-line"></span>
+            </div>
+            <div class="max-w-2xl mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-strong mb-5" data-i18n-html="blog.heading">Articles on <span class="text-gradient">iOS development.</span></h2>
+                <p class="text-muted text-lg leading-relaxed" data-i18n="blog.intro">I haven't written new posts recently because I've been building apps instead.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-px bg-line border border-line rounded-lg overflow-hidden mb-10">
+                <a href="https://medium.com/@sebastianbo/learn-and-master-%EF%B8%8F-the-basics-of-structured-concurrent-programming-in-swift-in-15-minutes-5fc700b0a77c" target="_blank" class="reveal block p-6 bg-ink group">
+                    <img src="Images/asyncawaitbanner.png" alt="" class="w-full h-32 object-cover rounded-md border border-line mb-4">
+                    <p class="lbl mb-2">Feb 2022</p>
+                    <h4 class="font-semibold text-strong group-hover:text-brand transition-colors">Structured Concurrency in Swift</h4>
                 </a>
-                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-combine-in-5-minutes-639421268219" target="_blank"
-                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
-                    <img src="Images/combine.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
-                    <h4 class="font-display font-semibold text-white mb-1">Basics of Combine in 5 Minutes</h4>
-                    <p class="text-xs text-white/50">Mar 2020</p>
+                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-combine-in-5-minutes-639421268219" target="_blank" class="reveal block p-6 bg-ink group">
+                    <img src="Images/combine.png" alt="" class="w-full h-32 object-cover rounded-md border border-line mb-4">
+                    <p class="lbl mb-2">Mar 2020</p>
+                    <h4 class="font-semibold text-strong group-hover:text-brand transition-colors">Basics of Combine in 5 Minutes</h4>
                 </a>
-                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-ios-remote-push-notifications-in-2018-in-under-10-minutes-825ca6bee092" target="_blank"
-                    class="reveal block rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
-                    <img src="Images/push.png" alt="" class="w-full h-32 object-cover rounded-lg mb-4">
-                    <h4 class="font-display font-semibold text-white mb-1">iOS Remote Push Notifications</h4>
-                    <p class="text-xs text-white/50">Jul 2019</p>
+                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-ios-remote-push-notifications-in-2018-in-under-10-minutes-825ca6bee092" target="_blank" class="reveal block p-6 bg-ink group">
+                    <img src="Images/push.png" alt="" class="w-full h-32 object-cover rounded-md border border-line mb-4">
+                    <p class="lbl mb-2">Jul 2019</p>
+                    <h4 class="font-semibold text-strong group-hover:text-brand transition-colors">iOS Remote Push Notifications</h4>
                 </a>
             </div>
-            <div class="reveal space-y-2">
-                <p class="text-sm text-white/50 mb-4" data-i18n="blog.more">More:</p>
-                <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-iglistkit-in-10-minutes-3b9ce8a2632b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">IGListKit in 10 Minutes (2018)</a>
-                <a href="https://medium.com/ios-os-x-development/learn-and-master-%EF%B8%8F-the-basics-of-rxswift-in-10-minutes-818ea6e0a05b" target="_blank" class="block py-2 text-white/70 hover:text-white border-b border-white/10">RxSwift in 10 Minutes (2017)</a>
-                <a href="https://medium.com/ios-os-x-development/ios-code-signing-provisioning-in-a-nutshell-d5b247760bef" target="_blank" class="block py-2 text-white/70 hover:text-white">iOS Code Signing (2016)</a>
+            <div class="reveal">
+                <p class="lbl mb-3" data-i18n="blog.more">More:</p>
+                <div class="border border-line rounded-lg divide-y divide-[color:var(--line)] text-sm">
+                    <a href="https://medium.com/ios-os-x-development/learn-master-%EF%B8%8F-the-basics-of-iglistkit-in-10-minutes-3b9ce8a2632b" target="_blank" class="flex justify-between px-5 py-3 text-text hover:text-brand"><span>IGListKit in 10 Minutes</span><span class="font-mono text-xs text-dim">2018</span></a>
+                    <a href="https://medium.com/ios-os-x-development/learn-and-master-%EF%B8%8F-the-basics-of-rxswift-in-10-minutes-818ea6e0a05b" target="_blank" class="flex justify-between px-5 py-3 text-text hover:text-brand"><span>RxSwift in 10 Minutes</span><span class="font-mono text-xs text-dim">2017</span></a>
+                    <a href="https://medium.com/ios-os-x-development/ios-code-signing-provisioning-in-a-nutshell-d5b247760bef" target="_blank" class="flex justify-between px-5 py-3 text-text hover:text-brand"><span>iOS Code Signing</span><span class="font-mono text-xs text-dim">2016</span></a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-32 border-t border-white/10">
-        <div class="max-w-3xl mx-auto px-6 text-center reveal">
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4" data-i18n-html="cta.heading">Get <span class="text-gradient">in touch</span></h2>
-            <p class="text-white/60 mb-10" data-i18n="cta.body">If you want to talk about iOS development or my projects, send me a message.</p>
-            <a href="mailto:self.dealloc@icloud.com"
-                class="inline-flex items-center gap-2 px-8 py-4 bg-white text-surface rounded-full font-semibold hover:bg-white/90 transition-colors">
-                <i class="ph ph-envelope-simple"></i> <span data-i18n="cta.button">Contact me</span>
-            </a>
+    <!-- Contact -->
+    <section class="py-20 lg:py-28">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="border border-line rounded-lg bg-panel/60 p-8 md:p-12 grid md:grid-cols-[1fr_auto] gap-8 items-center reveal">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-strong mb-2" data-i18n-html="cta.heading">Get <span class="text-gradient">in touch</span></h2>
+                    <p class="text-muted" data-i18n="cta.body">If you want to talk about iOS development or my projects, send me a message.</p>
+                </div>
+                <a href="mailto:self.dealloc@icloud.com" class="btn px-6 py-3.5 whitespace-nowrap">
+                    <i class="ph ph-envelope-simple text-lg"></i> <span data-i18n="cta.button">Contact me</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 bg-surface-elevated/50 py-12">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <a href="#" class="font-display font-semibold text-white">Sebastian Boldt</a>
-                <p class="text-sm text-white/50 mt-1" data-i18n="footer.tagline">Mobile Application Engineer since 2012</p>
+    <footer class="border-t border-line pt-14 pb-8">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-10 mb-14">
+                <div class="md:col-span-2">
+                    <a href="#" class="font-semibold text-strong">Sebastian Boldt</a>
+                    <p class="text-sm text-muted mt-2" data-i18n="footer.tagline">Mobile Application Engineer since 2012</p>
+                </div>
+                <div>
+                    <h4 class="lbl mb-4">Sections</h4>
+                    <ul class="space-y-2.5 text-muted text-sm">
+                        <li><a href="#projects" class="hover:text-strong" data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="#skills" class="hover:text-strong" data-i18n="nav.expertise">Expertise</a></li>
+                        <li><a href="#work" class="hover:text-strong" data-i18n="nav.work">Work</a></li>
+                        <li><a href="#testimonials" class="hover:text-strong" data-i18n="nav.testimonials">Testimonials</a></li>
+                        <li><a href="#blog" class="hover:text-strong" data-i18n="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="lbl mb-4">Links</h4>
+                    <ul class="space-y-2.5 text-muted text-sm">
+                        <li><a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-strong">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-strong">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-strong">Instagram</a></li>
+                        <li><a href="https://open.spotify.com/artist/10m1VL1DyqBfIJw54rOefh" target="_blank" class="hover:text-strong">Spotify</a></li>
+                    </ul>
+                </div>
             </div>
-            <nav class="flex gap-8 text-sm text-white/60">
-                <a href="#projects" class="hover:text-white" data-i18n="nav.projects">Projects</a>
-                <a href="#skills" class="hover:text-white" data-i18n="nav.expertise">Expertise</a>
-                <a href="#work" class="hover:text-white" data-i18n="nav.work">Work</a>
-                <a href="#testimonials" class="hover:text-white" data-i18n="nav.testimonials">Testimonials</a>
-                <a href="#blog" class="hover:text-white" data-i18n="nav.blog">Blog</a>
-            </nav>
-            <div class="flex gap-6 text-white/50">
-                <a href="https://github.com/SebastianBoldt" target="_blank" class="hover:text-white" aria-label="GitHub"><i class="ph-fill ph-github-logo text-xl"></i></a>
-                <a href="https://www.linkedin.com/in/sebastian-boldt-9b465261/" target="_blank" class="hover:text-white" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
-                <a href="https://www.instagram.com/sebastianboldt/" target="_blank" class="hover:text-white" aria-label="Instagram"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
-                <a href="https://open.spotify.com/artist/10m1VL1DyqBfIJw54rOefh" target="_blank" class="hover:text-white" aria-label="Spotify"><i class="ph-fill ph-spotify-logo text-xl"></i></a>
+            <div class="border-t border-line pt-6 flex flex-col md:flex-row justify-between items-center gap-3 font-mono text-[11px] text-dim">
+                <p>© 2026 Sebastian Boldt</p>
+                <a href="privacy.html" class="hover:text-strong" data-i18n="footer.privacy">Privacy</a>
             </div>
-        </div>
-        <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/40">
-            © 2025 Sebastian Boldt · <a href="privacy.html" class="hover:text-white/70" data-i18n="footer.privacy">Privacy</a>
         </div>
     </footer>
 
     <script src="js/i18n.js"></script>
-    <!-- Scripts -->
     <script>
-        // Mobile Menu Toggle
+        // Theme switch: dark by default, the choice is remembered
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        const syncThemeMeta = () => {
+            themeMeta.content = document.documentElement.classList.contains('dark') ? '#0B0C0E' : '#FFFFFF';
+        };
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const dark = document.documentElement.classList.toggle('dark');
+            try { localStorage.setItem('sb-theme', dark ? 'dark' : 'light'); } catch (e) {}
+            syncThemeMeta();
+        });
+        syncThemeMeta();
+
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
         }
 
-        // Navbar Blur Effect on Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('glass', 'shadow-xl');
-            } else {
-                nav.classList.remove('glass', 'shadow-xl');
-            }
-        });
+        const nav = document.getElementById('navbar');
+        const onScroll = () => nav.classList.toggle('nav-solid', window.scrollY > 24);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-        // Intersection Observer for Fade-in Animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const revealInView = () => {
+            document.querySelectorAll('.reveal:not(.active)').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
+            });
+        };
+        window.addEventListener('load', revealInView);
+        window.addEventListener('scroll', revealInView, { passive: true });
     </script>
 </body>
 
