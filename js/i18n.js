@@ -94,7 +94,10 @@
         "footer": {
             "tagline": "Mobile Application Engineer since 2012",
             "privacy": "Privacy",
-            "home": "Home"
+            "home": "Home",
+            "sections": "Sections",
+            "links": "Links",
+            "legal": "Legal"
         }
     },
     "de": {
@@ -188,7 +191,10 @@
         "footer": {
             "tagline": "Mobile Application Engineer seit 2012",
             "privacy": "Datenschutz",
-            "home": "Startseite"
+            "home": "Startseite",
+            "sections": "Bereiche",
+            "links": "Links",
+            "legal": "Rechtliches"
         }
     }
 };

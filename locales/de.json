@@ -89,6 +89,9 @@
   "footer": {
     "tagline": "Mobile Application Engineer seit 2012",
     "privacy": "Datenschutz",
-    "home": "Startseite"
+    "home": "Startseite",
+    "sections": "Bereiche",
+    "links": "Links",
+    "legal": "Rechtliches"
   }
 }
