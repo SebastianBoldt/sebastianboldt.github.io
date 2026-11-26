@@ -68,7 +68,7 @@
     "pianooDesc": "A music theory app for chords, scales and progressions, made for writing songs and practicing.",
     "gioTagline": "Measure your range of motion.",
     "comingSoon": "Coming soon",
-    "gioDesc": "Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and tracks your recovery over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.",
+    "gioDesc": "Gio+ uses the camera to measure how far your elbow, knee or shoulder bends and straightens, and shows how your range of motion changes over time. Built with TCA, SQLiteData, Vision, WidgetKit, App Intents and SwiftUI.",
     "moreTitle": "More projects",
     "jellyDesc": "Open-source library for animated view controller transitions in UIKit.",
     "openSource": "Open Source",

@@ -68,7 +68,7 @@
     "pianooDesc": "Eine Musiktheorie-App für Akkorde, Tonleitern und Progressionen, gedacht fürs Songwriting und Üben.",
     "gioTagline": "Miss deine Beweglichkeit.",
     "comingSoon": "Demnächst",
-    "gioDesc": "Gio+ misst mit der Kamera, wie weit sich Ellbogen, Knie oder Schulter beugen und strecken lassen, und zeigt deinen Fortschritt in der Reha. Gebaut mit TCA, SQLiteData, Vision, WidgetKit, App Intents und SwiftUI.",
+    "gioDesc": "Gio+ misst mit der Kamera, wie weit sich Ellbogen, Knie oder Schulter beugen und strecken lassen, und zeigt, wie sich dein Bewegungsumfang entwickelt. Gebaut mit TCA, SQLiteData, Vision, WidgetKit, App Intents und SwiftUI.",
     "moreTitle": "Weitere Projekte",
     "jellyDesc": "Open-Source-Bibliothek für animierte View-Controller-Transitions in UIKit.",
     "openSource": "Open Source",
